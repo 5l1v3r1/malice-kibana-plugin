@@ -5,6 +5,18 @@ malice
 
 ---
 
+install kibana
+--------------
+
+```bash
+$ git clone https://github.com/elastic/kibana.git
+$ cd kibana
+$ nvm install "$(cat .node-version)"
+$ npm install
+$ npm run elasticsearch&
+$ npm run makelogs
+```
+
 development
 -----------
 

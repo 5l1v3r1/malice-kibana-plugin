@@ -78,10 +78,5 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y nodejs build-essential libssl-dev git-core
     curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
     bash install_nvm.sh
-    echo "Installing kibana ================================"
-    git clone https://github.com/elastic/kibana.git /vagrant/kibana
-    cd /vagrant/kibana
-    nvm install "$(cat .node-version)"
-    npm install
   SHELL
 end
