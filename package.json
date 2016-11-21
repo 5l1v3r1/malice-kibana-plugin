@@ -1,10 +1,12 @@
 {
   "name": "malice",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Malice Kibana Plugin",
   "main": "index.js",
+  "license" : "Apache-2.0",
+  "repository": "github:maliceio/malice-kibana-plugin",
   "kibana": {
-    "version": "5.0.0"
+    "version": "master"
   },
   "scripts": {
     "lint": "eslint",
