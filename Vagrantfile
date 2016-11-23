@@ -66,6 +66,7 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    sudo -i -u ubuntu ln -s /vagrant /home/ubuntu/malice-kibana-plugin
     echo "Installing Java ================================"
     sudo apt-get install -y python-software-properties debconf-utils
     sudo add-apt-repository -y ppa:webupd8team/java
@@ -73,10 +74,17 @@ Vagrant.configure("2") do |config|
     echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
     sudo apt-get install -y oracle-java8-installer
     echo "Installing NodeJS ================================"
-    curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-    sudo bash nodesource_setup.sh
+    curl -o- https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh | bash
     sudo apt-get install -y nodejs build-essential libssl-dev git-core
-    curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
-    bash install_nvm.sh
+    sudo -H -u ubuntu bash -c 'curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash'
+    source /home/ubuntu/.profile
+    sudo -H -u ubuntu bash -c 'sudo npm install -g avn avn-nvm avn-n'
+    sudo -H -u ubuntu bash -c 'avn setup'
+    source /home/ubuntu/.profile
+    sudo chown -R ubuntu: /home/ubuntu
+    echo "Installing Kibana ================================"
+    sudo -H -u ubuntu bash -c 'git clone https://github.com/elastic/kibana.git'
+    cd kibana
+    sudo -H -u ubuntu bash -c 'nvm install "$(cat .node-version)"'
   SHELL
 end

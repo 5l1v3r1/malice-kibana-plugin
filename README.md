@@ -9,11 +9,16 @@ install kibana
 --------------
 
 ```bash
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+$ source ~/.profile
+$ sudo npm install -g avn avn-nvm avn-n
+$ avn setup
+$ source ~/.profile
 $ git clone https://github.com/elastic/kibana.git
 $ cd kibana
 $ nvm install "$(cat .node-version)"
 $ npm install
-$ npm run elasticsearch&
+$ npm run elasticsearch &
 $ npm run makelogs
 ```
 
