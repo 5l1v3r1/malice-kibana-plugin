@@ -8,13 +8,19 @@ malice
 install kibana
 --------------
 
+Build docker image
+
 ```bash
 $ docker build -t kplug .
 ```
 
+Start Kibana's Elasticsearch
+
 ```bash  
 $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
 ```
+
+Add some logs and start Kibana Plugin
 
 ```bash
 $ docker exec -it plug npm run makelogs
