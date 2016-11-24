@@ -24,7 +24,7 @@ Add some logs and start Kibana Plugin
 
 ```bash
 $ docker exec -it plug npm run makelogs
-$ docker exec -it plug bash -c "cd ../plug && npm start -- --elasticsearch.url 'http://localhost:9200'"
+$ docker exec -it plug bash -c "cd ../plugin && npm start -- --elasticsearch.url 'http://localhost:9200'"
 ```
 
 Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
