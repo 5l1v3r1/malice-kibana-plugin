@@ -27,6 +27,10 @@ $ docker exec -it plug npm run makelogs
 $ docker exec -it plug bash -c "cd ../plug && npm start -- --elasticsearch.url 'http://localhost:9200'"
 ```
 
+Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
+
+> **NOTE:** urls with be different every time you start it.  Notice the `cqw`
+
 development
 -----------
 
