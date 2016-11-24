@@ -44,6 +44,8 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
 COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
 COPY docker-entrypoint.sh /
 
+VOLUME /usr/share/plugin  
+
 WORKDIR /usr/share/kibana
 
 ENV PATH /usr/share/kibana/bin:$PATH
