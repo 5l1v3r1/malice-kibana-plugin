@@ -41,6 +41,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
+COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
 COPY docker-entrypoint.sh /
 
 WORKDIR /usr/share/kibana
@@ -48,5 +49,6 @@ WORKDIR /usr/share/kibana
 ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["kibana"]
+ENTRYPOINT ["gosu","kibana"]
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD npm run elasticsearch

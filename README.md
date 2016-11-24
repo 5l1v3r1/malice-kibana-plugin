@@ -22,6 +22,14 @@ $ npm run elasticsearch &
 $ npm run makelogs
 ```
 
+```bash  
+$ docker run -d --name plug -v `pwd`:/usr/share/plug -p 5601:5601 -p 443:443 kplug
+```
+
+```bash
+$ docker exec -it plug cd ../plug && npm start -- --elasticsearch.url 'http://localhost:9200'
+```
+
 development
 -----------
 
