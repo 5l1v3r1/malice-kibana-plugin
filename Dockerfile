@@ -28,8 +28,10 @@ RUN apk-install -t .build-deps wget ca-certificates tar git \
   && echo "Installing Kibana ================================" \
   && git clone https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
-  && bash -c 'source ~/.bash_profile && nvm install "$(cat .node-version)"' \
-  && bash -c 'nvm use "$(cat .node-version)" && npm config delete prefix && npm install'
+  && bash -c 'source ~/.bash_profile \
+    && nvm install "$(cat .node-version)" \
+    && npm config delete prefix \
+    && npm install' \
   && adduser -DH -s /sbin/nologin kibana \
   && chown -R kibana:kibana /usr/share/kibana \
   && rm -rf /tmp/* \
