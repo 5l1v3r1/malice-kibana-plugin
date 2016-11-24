@@ -9,17 +9,7 @@ install kibana
 --------------
 
 ```bash
-$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-$ source ~/.profile
-$ sudo npm install -g avn avn-nvm avn-n
-$ avn setup
-$ source ~/.profile
-$ git clone https://github.com/elastic/kibana.git
-$ cd kibana
-$ nvm install "$(cat .node-version)"
-$ npm install
-$ npm run elasticsearch &
-$ npm run makelogs
+$ docker build -t kplug .
 ```
 
 ```bash  
@@ -27,7 +17,8 @@ $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 k
 ```
 
 ```bash
-$ docker exec -it plug cd ../plug && npm start -- --elasticsearch.url 'http://localhost:9200'
+$ docker exec -it plug npm run makelogs
+$ docker exec -it plug bash -c "cd ../plug && npm start -- --elasticsearch.url 'http://localhost:9200'"
 ```
 
 development
