@@ -1,12 +1,12 @@
 import moment from 'moment';
-import chrome from 'ui/chrome';
 import uiModules from 'ui/modules';
 import uiRoutes from 'ui/routes';
 
-import 'ui/autoload/styles';
-var logoUrl = require('./logo.png');
-import './less/main.less';
 import template from './templates/index.html';
+
+import uiChrome from 'ui/chrome';
+import logoUrl from 'plugins/malice/logo.png';
+
 
 uiRoutes.enable();
 uiRoutes
@@ -33,14 +33,4 @@ uiModules
         $scope.currentTime = currentTime.add(1, 'second').format('HH:mm:ss');
       }, 1000);
       $scope.$watch('$destroy', unsubscribe);
-    });
-
-uiModules.get('kibana', [])
-    .config(function () {
-      let config = chrome.getInjected('brandConfig', {});
-      chrome
-            .setBrand({
-              'logo': 'url(' + logoUrl + ') left no-repeat',
-              'smallLogo': 'url(' + logoUrl + ') left no-repeat'
-            });
     });

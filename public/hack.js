@@ -1,16 +1,11 @@
-import chrome from 'ui/chrome';
 import uiModules from 'ui/modules';
-
 import './less/main.less';
 
-var logoUrl = require('./logo.png');
+import uiChrome from 'ui/chrome';
+import logoUrl from 'plugins/malice/logo.png';
 
-uiModules.get('kibana', [])
-    .config(function () {
-      let config = chrome.getInjected('brandConfig', {});
-      chrome
-            .setBrand({
-              'logo': 'url(' + logoUrl + ') left no-repeat',
-              'smallLogo': 'url(' + logoUrl + ') left no-repeat'
-            });
-    });
+uiChrome
+.setBrand({
+  logo: `url(${logoUrl}) center no-repeat`,
+  smalllogo: `url(${logoUrl}) center no-repeat`
+});
