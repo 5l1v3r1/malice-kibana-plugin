@@ -4,6 +4,7 @@ import uiModules from 'ui/modules';
 import uiRoutes from 'ui/routes';
 
 import 'ui/autoload/styles';
+var logoUrl = require('./logo.png');
 import './less/main.less';
 import template from './templates/index.html';
 
@@ -39,7 +40,7 @@ uiModules.get('kibana', [])
         let config = chrome.getInjected('brandConfig', {});
         chrome
             .setBrand({
-                'logo': 'url(' + "https://github.com/maliceio/malice-kibana-plugin/raw/master/public/images/logo2.png" + ') left no-repeat',
-                'smallLogo': 'url(' + "https://github.com/maliceio/malice-kibana-plugin/raw/master/public/images/logo2.png" + ') left no-repeat'
+                'logo': 'url(' + logoUrl + ') left no-repeat',
+                'smallLogo': 'url(' + logoUrl + ') left no-repeat'
             })
     });

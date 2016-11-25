@@ -5,18 +5,18 @@ export default function (kibana) {
     require: ['elasticsearch'],
 
     uiExports: {
-      
+
       app: {
         title: 'Malice',
         description: 'Malice Kibana Plugin',
+        icon: 'plugins/malice/icon.svg',
         main: 'plugins/malice/app'
       },
-      
-      
+
       hacks: [
         'plugins/malice/hack'
       ]
-      
+
     },
 
     config(Joi) {
@@ -25,12 +25,12 @@ export default function (kibana) {
       }).default();
     },
 
-    
+
     init(server, options) {
       // Add server routes and initalize the plugin here
       exampleRoute(server);
     }
-    
+
 
   });
 };
