@@ -39,7 +39,7 @@ uiModules.get('kibana', [])
         let config = chrome.getInjected('brandConfig', {});
         chrome
             .setBrand({
-                'logo': 'url(' + "public/images/malice small.png" + ') left no-repeat',
-                'smallLogo': 'url(' + "public/images/malice small.png" + ') left no-repeat'
+                'logo': 'url(' + "https://github.com/maliceio/malice-kibana-plugin/raw/master/public/images/logo.png" + ') left no-repeat',
+                'smallLogo': 'url(' + "https://github.com/maliceio/malice-kibana-plugin/raw/master/public/images/logo.png" + ') left no-repeat'
             })
     });
