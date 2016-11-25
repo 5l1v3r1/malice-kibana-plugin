@@ -6,3 +6,5 @@ kibana/
 
 *.log
 .idea
+
+.DS_Store

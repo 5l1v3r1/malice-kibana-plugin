@@ -13,6 +13,7 @@ export default function (kibana) {
         main: 'plugins/malice/app'
       },
 
+
       hacks: [
         'plugins/malice/hack'
       ]
