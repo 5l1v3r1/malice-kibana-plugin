@@ -73,9 +73,9 @@ For more information about any of these commands run `npm run ${task} -- --help`
 $ npm start -- --elasticsearch.url 'http://localhost:9200'
 ```
 
-https://github.com/elastic/generator-kibana-plugin
-
 #### NOTES
+
+[generator-kibana-plugin](https://github.com/elastic/generator-kibana-plugin)
 
 -	https://www.timroes.de/2015/12/02/writing-kibana-4-plugins-basics/
 -	https://www.timroes.de/2015/12/02/writing-kibana-4-plugins-simple-visualizations/
