@@ -2,3 +2,34 @@
   margin-top: 30px;
 }
 
+.global-nav {
+  width: 53px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  background-color: #2e323a;
+  overflow: hidden;
+}
+
+.global-nav-link:hover {
+  background-color: #fd8d1d
+}
+
+.global-nav-link.active {
+  background-color: #fd8d1d
+}
+
+.global-nav__links::-webkit-scrollbar-thumb {
+  background-color: #fd8d1d
+}
+
+.global-nav .logo-small.kibana,
+.global-nav .logo.kibana {
+  // background-image: url(/tuj/bundles/0cebf3d61338c454670b1c5bdf5d6d8d.svg);
+  background-position: 6px 10px;
+  background-size: 140px 50px;
+  background-repeat: no-repeat;
+  background-color: #db5613;
+}
