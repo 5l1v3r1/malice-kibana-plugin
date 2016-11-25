@@ -42,7 +42,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
+# COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
 COPY docker-entrypoint.sh /
 
 VOLUME /usr/share/plugin
