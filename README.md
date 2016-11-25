@@ -3,7 +3,18 @@ malice
 
 > Malice Kibana Plugin
 
+![screen-shot](https://raw.githubusercontent.com/maliceio/malice-kibana-plugin/master/screen-shot.png)
+
 ---
+#### Requirements
+
+* Kibana 5.0+
+
+
+### Installation
+```
+$ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/0.1.0/malice-0.1.0.zip
+```
 
 install kibana
 --------------
