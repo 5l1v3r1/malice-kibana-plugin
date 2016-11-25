@@ -10,14 +10,15 @@ malice
 
 * Kibana 5.0+
 
-
 ### Installation
 ```
 $ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/0.1.0/malice-0.1.0.zip
 ```
 
-install kibana
---------------
+development
+-----------
+
+### install kibana
 
 Build docker image
 
@@ -42,8 +43,7 @@ Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
 
 > **NOTE:** urls with be different every time you start it.  Notice the `cqw`
 
-development
------------
+### start plugin
 
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following npm tasks.
 
