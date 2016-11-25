@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "repository": "github:maliceio/malice-kibana-plugin",
   "kibana": {
-    "version": "6.0.0-alpha1"
+    "version": "5.0.1"
   },
   "scripts": {
     "lint": "eslint",

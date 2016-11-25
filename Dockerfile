@@ -7,6 +7,7 @@ ENV GOSU_URL https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu
 
 # Install java and tini
 RUN apk-install openjdk8-jre tini
+
 # Install gosu
 RUN apk-install -t build-deps wget ca-certificates gpgme \
   && set -x \
@@ -31,7 +32,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
   && gosu kibana bash -c "/tmp/install.sh" \
   && echo "Installing Kibana ================================" \
-  && git clone https://github.com/elastic/kibana.git /usr/share/kibana \
+  && git clone -b v5.0.1 https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
   && chown -R kibana:kibana /usr/share/kibana \
   && gosu kibana bash -c 'source /home/kibana/.bash_profile \
@@ -44,7 +45,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
 COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
 COPY docker-entrypoint.sh /
 
-VOLUME /usr/share/plugin  
+VOLUME /usr/share/plugin
 
 WORKDIR /usr/share/kibana
 
