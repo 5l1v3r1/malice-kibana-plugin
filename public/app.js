@@ -11,36 +11,36 @@ import template from './templates/index.html';
 uiRoutes.enable();
 uiRoutes
     .when('/', {
-        template,
-        resolve: {
-            currentTime($http) {
-                return $http.get('../api/malice/example').then(function(resp) {
-                    return resp.data.time;
-                });
-            }
+      template,
+      resolve: {
+        currentTime($http) {
+          return $http.get('../api/malice/example').then(function (resp) {
+            return resp.data.time;
+          });
         }
+      }
     });
 
 uiModules
     .get('app/malice', [])
-    .controller('maliceHelloWorld', function($scope, $route, $interval) {
-        $scope.title = 'Malice';
-        $scope.description = 'Malice Kibana plugin';
+    .controller('maliceHelloWorld', function ($scope, $route, $interval) {
+      $scope.title = 'Malice';
+      $scope.description = 'Malice Kibana plugin';
 
-        var currentTime = moment($route.current.locals.currentTime);
-        $scope.currentTime = currentTime.format('HH:mm:ss');
-        var unsubscribe = $interval(function() {
-            $scope.currentTime = currentTime.add(1, 'second').format('HH:mm:ss');
-        }, 1000);
-        $scope.$watch('$destroy', unsubscribe);
+      var currentTime = moment($route.current.locals.currentTime);
+      $scope.currentTime = currentTime.format('HH:mm:ss');
+      var unsubscribe = $interval(function () {
+        $scope.currentTime = currentTime.add(1, 'second').format('HH:mm:ss');
+      }, 1000);
+      $scope.$watch('$destroy', unsubscribe);
     });
 
 uiModules.get('kibana', [])
-    .config(function() {
-        let config = chrome.getInjected('brandConfig', {});
-        chrome
+    .config(function () {
+      let config = chrome.getInjected('brandConfig', {});
+      chrome
             .setBrand({
-                'logo': 'url(' + logoUrl + ') left no-repeat',
-                'smallLogo': 'url(' + logoUrl + ') left no-repeat'
-            })
+              'logo': 'url(' + logoUrl + ') left no-repeat',
+              'smallLogo': 'url(' + logoUrl + ') left no-repeat'
+            });
     });

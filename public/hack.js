@@ -6,11 +6,11 @@ import './less/main.less';
 var logoUrl = require('./logo.png');
 
 uiModules.get('kibana', [])
-    .config(function() {
-        let config = chrome.getInjected('brandConfig', {});
-        chrome
+    .config(function () {
+      let config = chrome.getInjected('brandConfig', {});
+      chrome
             .setBrand({
-                'logo': 'url(' + logoUrl + ') left no-repeat',
-                'smallLogo': 'url(' + logoUrl + ') left no-repeat'
-            })
+              'logo': 'url(' + logoUrl + ') left no-repeat',
+              'smallLogo': 'url(' + logoUrl + ') left no-repeat'
+            });
     });
