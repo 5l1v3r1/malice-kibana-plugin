@@ -41,7 +41,7 @@ $ docker exec -it plug bash -c "cd ../plugin && npm start -- --elasticsearch.url
 
 Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
 
-> **NOTE:** urls with be different every time you start it.  Notice the `cqw`
+> **NOTE:** urls will be different every time you start it.  Notice the `cqw`
 
 ### start plugin
 
