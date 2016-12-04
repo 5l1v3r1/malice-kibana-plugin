@@ -50,6 +50,7 @@ RUN bash -c 'source /home/kibana/.bashrc \
 ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
+
 # ENTRYPOINT ["gosu","kibana"]
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["npm","run","elasticsearch"]
