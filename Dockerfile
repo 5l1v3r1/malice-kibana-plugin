@@ -37,14 +37,14 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && chown -R kibana:kibana /usr/share/kibana \
   && gosu kibana bash -c 'source /home/kibana/.bash_profile \
     && nvm install "$(cat .node-version)" \
-    && nvm use --delete-prefix v6.9.0 \
-    && nvm alias default "$(cat .node-version)" \
+    && echo "nvm use --delete-prefix $(cat .node-version)" >> /home/kibana/.bash_profile \
+    && nvm use --delete-prefix "$(cat .node-version)" \
     && npm install' \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
-# COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
-# COPY docker-entrypoint.sh /
+COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
+COPY docker-entrypoint.sh /
 
 VOLUME /usr/share/plugin
 
@@ -54,6 +54,6 @@ ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
 ENTRYPOINT ["gosu","kibana"]
-# ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["npm","run","elasticsearch"]
-# CMD npm run elasticsearch
+ENTRYPOINT ["/docker-entrypoint.sh"]
+# CMD ["npm","run","elasticsearch"]
+# CMD bash -c "source /home/kibana/.bash_profile && npm run elasticsearch"
