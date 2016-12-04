@@ -54,6 +54,6 @@ ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
 ENTRYPOINT ["gosu","kibana"]
-ENTRYPOINT ["/docker-entrypoint.sh"]
-# CMD ["npm","run","elasticsearch"]
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["npm","run","elasticsearch"]
 # CMD bash -c "source /home/kibana/.bash_profile && npm run elasticsearch"
