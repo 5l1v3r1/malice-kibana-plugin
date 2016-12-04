@@ -12,12 +12,6 @@ RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
   && touch /home/kibana/.bashrc \
   && chown kibana /home/kibana/.bashrc
 
-  # addgroup -S user -g 1000 && \
-  #  adduser -S user -h /home/user -s /bin/bash -G root -u 1000 -D && \
-  #  adduser user user && \
-  #  adduser user users && \
-  #  echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-
 RUN apk-install -t .build-deps wget ca-certificates tar \
   && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh -O /tmp/install.sh \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
