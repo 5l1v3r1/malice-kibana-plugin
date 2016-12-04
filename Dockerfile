@@ -38,7 +38,7 @@ WORKDIR /usr/share/kibana
 # Install kibana node_modules
 RUN bash -c 'source /home/kibana/.bashrc \
     && npm config set registry https://registry.npmjs.org/ \
-    && npm install --ignore-scripts --unsafe-perm' \
+    && npm install --unsafe-perm' \
   && rm -rf /tmp/*
 
 ENV PATH /usr/share/kibana/bin:$PATH
