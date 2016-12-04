@@ -28,22 +28,23 @@ RUN adduser -D -s /sbin/nologin kibana \
 
 RUN apk-install bash nodejs git
 RUN apk-install -t .build-deps wget ca-certificates tar \
-  && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh -O /tmp/install.sh \
+  && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh -O /tmp/install.sh \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
   && gosu kibana bash -c "/tmp/install.sh" \
   && echo "Installing Kibana ================================" \
-  && git clone -b v5.0.1 https://github.com/elastic/kibana.git /usr/share/kibana \
+  && git clone -b v5.0.2 https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
   && chown -R kibana:kibana /usr/share/kibana \
   && gosu kibana bash -c 'source /home/kibana/.bash_profile \
     && nvm install "$(cat .node-version)" \
-    && npm config delete prefix \
+    && nvm use --delete-prefix v6.9.0 \
+    && nvm alias default "$(cat .node-version)" \
     && npm install' \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
 # COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
-COPY docker-entrypoint.sh /
+# COPY docker-entrypoint.sh /
 
 VOLUME /usr/share/plugin
 
@@ -54,4 +55,5 @@ ENV PATH /usr/share/kibana/bin:$PATH
 EXPOSE 5601
 ENTRYPOINT ["gosu","kibana"]
 # ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD npm run elasticsearch
+CMD ["npm","run","elasticsearch"]
+# CMD npm run elasticsearch

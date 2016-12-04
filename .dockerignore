@@ -1,2 +1,7 @@
 build/kibana
 build/malice-0.1.0.zip
+node_modules
+LICENSE
+README.md
+screen-shot.png
+Vagrantfile
