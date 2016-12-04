@@ -2,11 +2,13 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-RUN apk-install openjdk8-jre nodejs git bash
+ARG VERSION=5.0.2
 
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin
+
+RUN apk-install openjdk8-jre nodejs git bash
 
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
   && touch /home/kibana/.bashrc \
@@ -17,8 +19,9 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
   && su kibana bash -c "/tmp/install.sh" \
   && echo "Installing Kibana ================================" \
-  && git clone -b v5.0.2 https://github.com/elastic/kibana.git /usr/share/kibana \
+  && git clone -b v${VERSION} https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
+  && sed -i "s|branch: '5.0'|version: '$VERSION'|g" tasks/config/esvm.js \
   && chown -R kibana /usr/share/kibana \
   && su kibana bash -c 'source /home/kibana/.bashrc \
     && nvm install "$(cat .node-version)" \
@@ -49,3 +52,5 @@ EXPOSE 5601
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["npm","run","elasticsearch"]
 # CMD bash -c "source /home/kibana/.bashrc && npm run elasticsearch"
+
+  # && sed -i "s|branch: '5.0'|version: '5.0.2'|g" tasks/config/esvm.js \
