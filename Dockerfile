@@ -2,46 +2,37 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ENV GOSU_VERSION 1.10
-ENV GOSU_URL https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64
+RUN apk-install openjdk8-jre nodejs git bash
 
-# Install java and tini
-RUN apk-install openjdk8-jre tini
+ENV LANG=C.UTF-8
+ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
+ENV PATH=${PATH}:${JAVA_HOME}/bin
 
-# Install gosu
-RUN apk-install -t build-deps wget ca-certificates gpgme \
-  && set -x \
-  && echo "Grab *gosu* for easy step-down from root..." \
-  && wget -O /usr/local/bin/gosu "$GOSU_URL" \
-  && wget -O /usr/local/bin/gosu.asc "$GOSU_URL.asc" \
-  && export GNUPGHOME="$(mktemp -d)" \
-  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-  && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-  && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
-  && chmod +x /usr/local/bin/gosu \
-  && gosu nobody true \
-  && apk del --purge build-deps
+RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
+  && touch /home/kibana/.bashrc \
+  && chown kibana /home/kibana/.bashrc
 
-RUN adduser -D -s /sbin/nologin kibana \
-  && touch /home/kibana/.bash_profile \
-  && chown -R kibana:kibana /home/kibana
+  # addgroup -S user -g 1000 && \
+  #  adduser -S user -h /home/user -s /bin/bash -G root -u 1000 -D && \
+  #  adduser user user && \
+  #  adduser user users && \
+  #  echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 
-RUN apk-install bash nodejs git
 RUN apk-install -t .build-deps wget ca-certificates tar \
   && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh -O /tmp/install.sh \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
-  && gosu kibana bash -c "/tmp/install.sh" \
+  && su kibana bash -c "/tmp/install.sh" \
   && echo "Installing Kibana ================================" \
   && git clone -b v5.0.2 https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
-  && chown -R kibana:kibana /usr/share/kibana \
-  && gosu kibana bash -c 'source /home/kibana/.bash_profile \
+  && chown -R kibana /usr/share/kibana \
+  && su kibana bash -c 'source /home/kibana/.bashrc \
     && nvm install "$(cat .node-version)" \
-    && echo "nvm use --delete-prefix $(cat .node-version)" >> /home/kibana/.bash_profile \
-    && nvm use --delete-prefix "$(cat .node-version)" \
-    && npm install' \
+    && echo "nvm use --delete-prefix $(cat .node-version)" >> /home/kibana/.bashrc' \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
+
+USER kibana
 
 COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
 COPY docker-entrypoint.sh /
@@ -50,10 +41,16 @@ VOLUME /usr/share/plugin
 
 WORKDIR /usr/share/kibana
 
+# Install kibana node_modules
+RUN bash -c 'source /home/kibana/.bashrc \
+    && npm config set registry https://registry.npmjs.org/ \
+    && npm install --ignore-scripts --unsafe-perm' \
+  && rm -rf /tmp/*
+
 ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
-ENTRYPOINT ["gosu","kibana"]
-ENTRYPOINT ["/docker-entrypoint.sh"]
-# CMD ["npm","run","elasticsearch"]
-# CMD bash -c "source /home/kibana/.bash_profile && npm run elasticsearch"
+# ENTRYPOINT ["gosu","kibana"]
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["npm","run","elasticsearch"]
+# CMD bash -c "source /home/kibana/.bashrc && npm run elasticsearch"
