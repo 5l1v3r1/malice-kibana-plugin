@@ -21,7 +21,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && echo "Installing Kibana ================================" \
   && git clone -b v${VERSION} https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
-  && sed -i "s|branch: '5.0'|version: '$VERSION'|g" tasks/config/esvm.js \
+  && sed -i "s|branch: '5.0'|version: '5.0'|g" tasks/config/esvm.js \
   && chown -R kibana /usr/share/kibana \
   && su kibana bash -c 'source /home/kibana/.bashrc \
     && nvm install "$(cat .node-version)" \
@@ -48,9 +48,6 @@ ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
 
-# ENTRYPOINT ["gosu","kibana"]
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["npm","run","elasticsearch"]
 # CMD bash -c "source /home/kibana/.bashrc && npm run elasticsearch"
-
-  # && sed -i "s|branch: '5.0'|version: '5.0.2'|g" tasks/config/esvm.js \
