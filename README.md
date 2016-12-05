@@ -1,6 +1,8 @@
 malice
 ======
 
+[![CircleCI](https://circleci.com/gh/maliceio/malice-kibana-plugin.svg?style=svg)](https://circleci.com/gh/maliceio/malice-kibana-plugin)
+
 > Malice Kibana Plugin
 
 ![screen-shot](https://raw.githubusercontent.com/maliceio/malice-kibana-plugin/master/screen-shot.png)
