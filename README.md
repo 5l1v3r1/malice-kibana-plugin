@@ -25,7 +25,9 @@ development
 Build docker image
 
 ```bash
-$ docker build -t kplug --build-arg VERSION=$(cat VERSION) github.com/maliceio/malice-kibana-plugin
+$ git clone https://github.com/maliceio/malice-kibana-plugin.git
+$ cd malice-kibana-plugin
+$ docker build -t kplug --build-arg VERSION=$(jq -r '.version' package.json) .
 ```
 
 Start Kibana's Elasticsearch

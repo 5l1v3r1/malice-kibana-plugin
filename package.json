@@ -14,7 +14,9 @@
     "test:server": "plugin-helpers test:server",
     "test:browser": "plugin-helpers test:browser",
     "build": "plugin-helpers build",
-    "postinstall": "plugin-helpers postinstall"
+    "postinstall": "plugin-helpers postinstall",
+    "postpublish" : "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
+    "getversion" : "cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]'"
   },
   "devDependencies": {
     "@elastic/eslint-config-kibana": "0.0.2",
