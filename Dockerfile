@@ -21,7 +21,6 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && echo "Installing Kibana ================================" \
   && git clone -b v${VERSION} https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
-  && sed -i "s|branch: '5.0'|version: '~5.0.0'|g" tasks/config/esvm.js \
   && chown -R kibana /usr/share/kibana \
   && su kibana bash -c 'source /home/kibana/.bashrc \
     && nvm install "$(cat .node-version)" \
