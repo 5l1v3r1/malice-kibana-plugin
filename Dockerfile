@@ -18,7 +18,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh -O /tmp/install.sh \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
   && su kibana bash -c "/tmp/install.sh" \
-  && echo "Installing Kibana ================================" \
+  && echo "Installing Kibana $VERSION ======================" \
   && git clone -b v${VERSION} https://github.com/elastic/kibana.git /usr/share/kibana \
   && cd /usr/share/kibana \
   && chown -R kibana /usr/share/kibana \
