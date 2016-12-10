@@ -9,8 +9,8 @@ export default function (kibana) {
       app: {
         title: 'Malice',
         description: 'Malice Kibana Plugin',
-        icon: 'plugins/malice/icon.svg',
-        main: 'plugins/malice/app'
+        main: 'plugins/malice/app',
+        icon: 'plugins/malice/icon.svg'
       },
 
 
