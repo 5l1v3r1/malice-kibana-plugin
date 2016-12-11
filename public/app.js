@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import overviewTemplate from './templates/index.html';
 import detailTemplate from './templates/detail.html';
 import healthTemplate from './templates/health.html';
+import dataTemplate from './templates/data.html';
 
 require('jquery');
 require('bootstrap');
@@ -27,6 +28,11 @@ uiRoutes
   template: healthTemplate,
   controller: 'elasticsearchHealthController',
   controllerAs: 'ctrl'
+})
+.when('/data', {
+  template: dataTemplate,
+  controller: 'elasticsearchDataController',
+  controllerAs: 'ctrl'
 });
 
 uiModules
@@ -46,5 +52,10 @@ uiModules
 .controller('elasticsearchHealthController', function ($http) {
   $http.get('../api/malice/health').then((response) => {
     this.health = response.data;
+  });
+})
+.controller('elasticsearchDataController', function ($http) {
+  $http.get('../api/malice/data').then((response) => {
+    this.data = response.data;
   });
 });
