@@ -38,16 +38,27 @@ Start Kibana's Elasticsearch
 $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
 ```
 
+=OR=
+
+```bash
+$ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
+```
+
 Install plugin `node_modules`
 
 ```bash
 $ docker exec -it plug bash -c "cd ../plugin && npm install"
 ```
 
-Add some logs and start Kibana Plugin
+Add some scan data
 
 ```bash
 $ docker exec -it plug bash -c "cd ../plugin/es-data && ./load-data.sh"
+```
+
+Start Kibana Plugin
+
+```bash
 $ docker exec -it plug bash -c "cd ../plugin && npm start -- --elasticsearch.url 'http://localhost:9200'"
 ```
 
