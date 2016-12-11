@@ -25,6 +25,7 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
   && su kibana bash -c 'source /home/kibana/.bashrc \
     && nvm install "$(cat .node-version)" \
     && echo "nvm use --delete-prefix $(cat .node-version)" >> /home/kibana/.bashrc' \
+  && npm install elasticdump -g \
   && rm -rf /tmp/* \
   && apk del --purge .build-deps
 
