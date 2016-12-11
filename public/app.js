@@ -30,21 +30,21 @@ uiRoutes
 });
 
 uiModules
-.get('app/elasticsearch_status')
+.get('app/malice')
 .controller('elasticsearchStatusController', function ($http) {
-  $http.get('../api/elasticsearch_status/indices').then((response) => {
+  $http.get('../api/malice/indices').then((response) => {
     this.indices = response.data;
   });
 })
 .controller('elasticsearchDetailController', function ($routeParams, $http) {
   this.index = $routeParams.name;
 
-  $http.get(`../api/elasticsearch_status/index/${this.index}`).then((response) => {
+  $http.get(`../api/malice/index/${this.index}`).then((response) => {
     this.status = response.data;
   });
 })
 .controller('elasticsearchHealthController', function ($http) {
-  $http.get('../api/elasticsearch_status/health').then((response) => {
+  $http.get('../api/malice/health').then((response) => {
     this.health = response.data;
   });
 });

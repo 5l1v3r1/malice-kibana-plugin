@@ -6,6 +6,6 @@
 <div class="container">
   <a class="btn btn-default" href="#/" role="button"><span class="glyphicon glyphicon-step-backward
 " aria-hidden="true"></span> Index list</a>
-  <h3>Health: </h3>
+  <h3 class="{{ ctrl.health.status }}">Health: {{ ctrl.health.status }}</h3>
   <pre>{{ ctrl.health | json }}</pre>
 </div>

@@ -4,12 +4,12 @@ export default function (server) {
   // elasticsearch. So we can access the elasticsearch plugins safely here.
   let call = server.plugins.elasticsearch.callWithRequest;
 
-  // Register a GET API at /api/elasticsearch_status/indices that returns
+  // Register a GET API at /api/malice/indices that returns
   // an array of all indices in the elasticsearch. The server is actually an
   // HAPI server and the complete documentation of the "route" method can be
   // found in the official documentation: http://hapijs.com/api#serverrouteoptions
   server.route({
-    path: '/api/elasticsearch_status/indices',
+    path: '/api/malice/indices',
     method: 'GET',
     // The handler method will be called with the request that was made to this
     // API and a reply method as 2nd parameter, that must be called with the
@@ -41,7 +41,7 @@ export default function (server) {
   server.route({
     // We can use path variables in here, that can be accessed on the request
     // object in the handler.
-    path: '/api/elasticsearch_status/index/{name}',
+    path: '/api/malice/index/{name}',
     method: 'GET',
     handler(req, reply) {
       call(req, 'cluster.state', {
@@ -59,7 +59,7 @@ export default function (server) {
   server.route({
     // We can use path variables in here, that can be accessed on the request
     // object in the handler.
-    path: '/api/elasticsearch_status/health',
+    path: '/api/malice/health',
     method: 'GET',
     handler(req, reply) {
       call(req, 'cluster.health').then(function (response) {
