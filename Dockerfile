@@ -2,7 +2,7 @@ FROM gliderlabs/alpine:3.4
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ARG VERSION=5.0.2
+ARG VERSION=5.1.1
 
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
