@@ -41,7 +41,7 @@ $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 k
 =OR=
 
 ```bash
-$ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
+$ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin
 ```
 
 Install plugin `node_modules`
