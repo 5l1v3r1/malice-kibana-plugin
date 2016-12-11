@@ -1,18 +1,20 @@
-malice
-======
+malice UI
+=========
 
-[![CircleCI](https://circleci.com/gh/maliceio/malice-kibana-plugin.svg?style=svg)](https://circleci.com/gh/maliceio/malice-kibana-plugin)
+[![CircleCI](https://circleci.com/gh/maliceio/malice-kibana-plugin.svg?style=svg)](https://circleci.com/gh/maliceio/malice-kibana-plugin) [![License](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Docker Stars](https://img.shields.io/docker/stars/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/) [![Docker Pulls](https://img.shields.io/docker/pulls/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/)
 
 > Malice Kibana Plugin
 
 ![screen-shot](https://raw.githubusercontent.com/maliceio/malice-kibana-plugin/master/screen-shot.png)
 
 ---
+
 #### Requirements
 
-* Kibana 5.1+
+-	Kibana 5.1+
 
 ### Installation
+
 ```
 $ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/5.1.1/malice-5.1.1.zip
 ```
@@ -32,7 +34,7 @@ $ docker build -t kplug --build-arg VERSION=$(jq -r '.version' package.json) .
 
 Start Kibana's Elasticsearch
 
-```bash  
+```bash
 $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
 ```
 
@@ -51,7 +53,7 @@ $ docker exec -it plug bash -c "cd ../plugin && npm start -- --elasticsearch.url
 
 Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
 
-> **NOTE:** urls will be different every time you start it.  Notice the `cqw`
+> **NOTE:** urls will be different every time you start it. Notice the `cqw`
 
 ### start plugin
 
