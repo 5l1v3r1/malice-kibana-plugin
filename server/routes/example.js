@@ -73,7 +73,7 @@ export default function (server) {
     method: 'GET',
     handler(req, reply) {
       call(req, 'search', {
-        index: 'logstash-0',
+        index: 'malice',
         size: 1
       }).then(function (response) {
         reply(response.hits.hits[0]);
