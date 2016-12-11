@@ -39,7 +39,7 @@ $ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 k
 Install plugin `node_modules`
 
 ```bash
-$ docker exec -it plug bash -c "cd ../plugin && npm install --unsafe-perm"
+$ docker exec -it plug bash -c "cd ../plugin && npm installß"
 ```
 
 Add some logs and start Kibana Plugin
