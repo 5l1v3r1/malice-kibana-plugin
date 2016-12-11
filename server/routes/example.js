@@ -53,7 +53,24 @@ export default function (server) {
     }
   });
 
+// };
+
+  // Add a route to retrieve the status of an index by its name
+  server.route({
+    // We can use path variables in here, that can be accessed on the request
+    // object in the handler.
+    path: '/api/elasticsearch_status/health',
+    method: 'GET',
+    handler(req, reply) {
+      call(req, 'cluster.health').then(function (response) {
+        reply(response);
+      });
+    }
+  });
+
 };
+
+// .response.data.mappings._default_.dynamic_templates["0"].string_fields.mapping.index
 
 // export default function (server) {
 //
