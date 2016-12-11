@@ -1,12 +1,43 @@
 <div class="container">
-  <div class="row">
-    <div class="col-12-sm">
-      <h1>Malice Status</h1>
-      <ul class="indexList">
+  <div class="page-header">
+    <h1>Malice <small>Status</small></h1>
+  </div>
+</div>
+<div class="container">
+  <div class="list-group" ng-repeat="index in ctrl.indices">
+    <a href="#/index/{{index}}" class="list-group-item">{{ index }}</a>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="page-header">
+    <h1>Malice <small>Status</small></h1>
+  </div>
+</div>
+
+<ul class="nav nav-tabs">
+  <li ng-repeat="index in ctrl.indices" ng-class="{active: $index == 0}" role="presentation">
+    <a data-toggle="tab" href="#{{index}}">{{ index }}</a>
+  </li>
+</ul>
+
+<div class="tab-content" ng-repeat="index.status in ctrl.indices">
+  <div id="{{index}}" class="tab-pane fade">
+      <h3>Index: {{ index }}</h3>
+			<pre>{{ index.status | json }}</pre>
+  </div>
+</div> -->
+<!-- <div class="container">
+  <div class="page-header">
+    <h1>Malice <small>Status</small></h1>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action <span class="caret"></span>
+      <ul class="dropdown-menu">
         <li ng-repeat="index in ctrl.indices">
           <a href="#/index/{{index}}">{{ index }}</a>
         </li>
       </ul>
+      </div>
     </div>
-  </div>
-</div>
+</div> -->

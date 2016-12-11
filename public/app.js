@@ -3,8 +3,12 @@ import uiRoutes from 'ui/routes';
 
 import 'ui/autoload/styles';
 import './less/main.less';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import overviewTemplate from './templates/index.html';
 import detailTemplate from './templates/detail.html';
+
+require('jquery');
+require('bootstrap');
 
 uiRoutes.enable();
 uiRoutes
@@ -26,7 +30,7 @@ uiModules
     this.indices = response.data;
   });
 })
-.controller('elasticsearchDetailController', function($routeParams, $http) {
+.controller('elasticsearchDetailController', function ($routeParams, $http) {
   this.index = $routeParams.name;
 
   $http.get(`../api/elasticsearch_status/index/${this.index}`).then((response) => {

@@ -1,0 +1,20 @@
+{
+  "name": "malice",
+  "description": "Malice Kibana Plugin",
+  "main": "index.js",
+  "authors": [
+    "blacktop <blacktop@users.noreply.github.com>"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/maliceio/malice-kibana-plugin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

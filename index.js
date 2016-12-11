@@ -28,6 +28,7 @@ export default function (kibana) {
 
 
     init(server, options) {
+      server.log(['status', 'info', 'malice'], 'Malice Initializing');
       // Add server routes and initalize the plugin here
       exampleRoute(server);
     }
