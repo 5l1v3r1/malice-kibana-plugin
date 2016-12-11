@@ -45,7 +45,7 @@ $ docker exec -it plug bash -c "cd ../plugin && npm install --unsafe-perm"
 Add some logs and start Kibana Plugin
 
 ```bash
-$ docker exec -it plug npm run makelogs
+$ docker exec -it plug bash -c "cd ../plugin/es-data && ./load-data.sh"
 $ docker exec -it plug bash -c "cd ../plugin && npm start -- --elasticsearch.url 'http://localhost:9200'"
 ```
 
