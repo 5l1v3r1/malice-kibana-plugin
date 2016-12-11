@@ -32,7 +32,6 @@ RUN apk-install -t .build-deps wget ca-certificates tar \
 USER kibana
 
 COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
-COPY docker-entrypoint.sh /
 
 VOLUME /usr/share/plugin
 
@@ -48,6 +47,4 @@ ENV PATH /usr/share/kibana/bin:$PATH
 
 EXPOSE 5601
 
-# ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["npm","run","elasticsearch"]
-# CMD bash -c "source /home/kibana/.bashrc && npm run elasticsearch"
