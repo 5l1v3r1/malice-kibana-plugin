@@ -4,11 +4,8 @@
   </div>
 </div>
 <div class="container">
-  <div class="row">
-    <div class="col-12-sm">
-			<a href="#/">Index list</a>
-      <h3>Index: {{ ctrl.index }}</h3>
-			<pre>{{ ctrl.status | json }}</pre>
-    </div>
-  </div>
+  <a class="btn btn-default" href="#/" role="button"><span class="glyphicon glyphicon-step-backward
+" aria-hidden="true"></span> Index list</a>
+  <h3>Index: {{ ctrl.index }}</h3>
+  <pre>{{ ctrl.status | json }}</pre>
 </div>
