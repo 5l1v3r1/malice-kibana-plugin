@@ -13,7 +13,8 @@ malice UI
 
 -	Kibana 5.1+
 
-### Installation
+Installation
+------------
 
 ```
 $ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/5.1.1/malice-5.1.1.zip
