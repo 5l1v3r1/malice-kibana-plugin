@@ -1,0 +1,74 @@
+<!-- <div class="malice app-container" ng-controller="maliceStatusController"> -->
+  <!-- Local nav. -->
+  <kbn-top-nav name="malice" config="topNavMenu">
+    <!-- Transcluded elements. -->
+    <div data-transclude-slots>
+      <!-- <div data-transclude-slot="topLeftCorner">
+        <span class="localTitle" ng-show="opts.savedSheet.id">
+          {{opts.savedSheet.lastSavedTitle}}
+          &nbsp;
+          <span class="fa fa-bolt" ng-click="showStats = !showStats"></span>
+          &nbsp;
+          <span class="malice-stats" ng-show="showStats">
+            Query Time {{stats.queryTime - stats.invokeTime}}ms /
+            Processing Time {{stats.sheetTime - stats.queryTime}}ms
+          </span>
+        </span>
+      </div> -->
+
+      <!-- Search. -->
+      <form
+        data-transclude-slot="bottomRow"
+        class="halfWidth"
+        role="form"
+        name="maliceSearch"
+        ng-submit="fetch()"
+      >
+        <div class="typeahead" kbn-typeahead="malice">
+          <div class="localSearch">
+            <input
+              parse-query
+              input-focus
+              kbn-typeahead-input
+              ng-model="state.query"
+              placeholder="Search..."
+              aria-label="Search input"
+              type="text"
+              class="localSearchInput"
+              ng-class="{'localSearchInput-isInvalid': discoverSearch.$invalid}"
+            >
+            <button
+              type="submit"
+              aria-label="Search"
+              class="localSearchButton"
+              ng-disabled="maliceSearch.$invalid"
+            >
+              <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+          </div>
+          <kbn-typeahead-items></kbn-typeahead-items>
+        </div>
+      </form>
+    </div>
+  </kbn-top-nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Malice <small>Status</small></h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Indices</h3>
+      </div>
+      <div class="panel-body">
+        <div class="btn-group" role="group" aria-label="...">
+          <a href="#/index/{{index}}" class="btn btn-default" role="button" ng-repeat="index in ctrl.indices">{{ index }}</a>
+        </div>
+      </div>
+    </div>
+    <p><a class="btn btn-default" href="#/health" role="button">Health Check</a></p>
+    <p><a class="btn btn-primary" href="#/data" role="button">Data</a></p>
+  </div>
+<!-- </div> -->
