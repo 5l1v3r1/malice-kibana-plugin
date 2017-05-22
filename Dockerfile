@@ -42,9 +42,11 @@ RUN bash /tmp/install.sh \
 WORKDIR /home/kibana/kibana
 
 # Install kibana node_modules
-RUN bash -c 'source $HOME/.bashrc \
+RUN apk add --no-cache python ca-certificates build-base \
+  && bash -c 'source $HOME/.bashrc \
   && nvm use --delete-prefix $(cat .node-version) --silent \
   && npm install --unsafe-perm' \
+  && apk del --purge python
   && rm -rf /tmp/*
 
 ENV PATH /home/kibana/kibana/bin:$PATH
