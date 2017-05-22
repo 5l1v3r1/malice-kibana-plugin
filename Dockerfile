@@ -5,46 +5,53 @@ MAINTAINER blacktop, https://github.com/blacktop
 ARG VERSION=5.4.0
 
 ENV LANG=C.UTF-8
-ENV NVM=0.33.2
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin
 
-RUN apk add --no-cache openjdk8-jre nodejs git bash
+RUN apk add --no-cache openjdk8-jre nodejs git bash wget
 
+# Create kibana user
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
   && touch /home/kibana/.bashrc \
   && chown kibana /home/kibana/.bashrc
 
-RUN apk add --no-cache -t .build-deps wget ca-certificates tar \
-  && wget -q https://raw.githubusercontent.com/creationix/nvm/v$NVM/install.sh -O /tmp/install.sh \
-  && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
-  && su kibana bash -c "/tmp/install.sh" \
-  && echo "Installing Kibana $VERSION ======================" \
-  && git clone -b v${VERSION} https://github.com/elastic/kibana.git /usr/share/kibana \
-  && cd /usr/share/kibana \
-  && chown -R kibana /usr/share/kibana \
-  && su kibana bash -c 'source /home/kibana/.bashrc \
-    && nvm install "$(cat .node-version)" \
-    && echo "nvm use --delete-prefix $(cat .node-version)" >> /home/kibana/.bashrc' \
-  && npm install elasticdump -g \
-  && rm -rf /tmp/* \
-  && apk del --purge .build-deps
+# Download NVM installer
+ADD https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh /tmp/install.sh
+RUN chown kibana /tmp/install.sh && chmod +x /tmp/install.sh
+
+# COPY kibana /home/kibana/kibana
+# RUN chown -R kibana /home/kibana/kibana
 
 USER kibana
 
-COPY config/kibana.dev.yml /usr/share/kibana/config/kibana.dev.yml
+WORKDIR /home/kibana
 
-VOLUME /usr/share/plugin
-
-WORKDIR /usr/share/kibana
-
-# Install kibana node_modules
-RUN bash -c 'source /home/kibana/.bashrc \
-    && npm config set registry https://registry.npmjs.org/ \
-    && npm install --unsafe-perm' \
+# Install kibana's verion of nodeJS
+RUN bash /tmp/install.sh \
+  && echo "===> Installing Kibana $VERSION" \
+  && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
+  && cd kibana \
+  && echo "===> NVM install node $(cat .node-version)" \
+  && bash -c 'source $HOME/.bashrc \
+    && nvm install "$(cat .node-version)"; exit 0 \
+    && nvm use --delete-prefix $(cat .node-version) --silent \
+    && npm install elasticdump -g' \
+  && echo "===> Installing elasticdump" \
   && rm -rf /tmp/*
 
-ENV PATH /usr/share/kibana/bin:$PATH
+WORKDIR /home/kibana/kibana
+
+# Install kibana node_modules
+RUN bash -c 'source $HOME/.bashrc \
+  && nvm use --delete-prefix $(cat .node-version) --silent \
+  && npm install --unsafe-perm' \
+  && rm -rf /tmp/*
+
+ENV PATH /home/kibana/kibana/bin:$PATH
+
+COPY config/kibana.dev.yml /home/kibana/kibana/config/kibana.dev.yml
+
+VOLUME /home/kibana/plugin
 
 EXPOSE 5601
 
