@@ -22,32 +22,33 @@ RUN chown kibana /tmp/install.sh && chmod +x /tmp/install.sh
 # COPY kibana /home/kibana/kibana
 # RUN chown -R kibana /home/kibana/kibana
 
-USER kibana
-
 WORKDIR /home/kibana
 
 # Install kibana's verion of nodeJS
 RUN bash /tmp/install.sh \
   && echo "===> Installing Kibana $VERSION" \
   && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
+  && chown -R kibana kibana \
   && cd kibana \
   && echo "===> NVM install node $(cat .node-version)" \
-  && bash -c 'source $HOME/.bashrc \
+  && su kibana bash -c 'source $HOME/.bashrc \
     && nvm install "$(cat .node-version)"; exit 0 \
     && nvm use --delete-prefix $(cat .node-version) --silent \
+    echo "===> Installing elasticdump" \
     && npm install elasticdump -g' \
-  && echo "===> Installing elasticdump" \
   && rm -rf /tmp/*
 
 WORKDIR /home/kibana/kibana
 
 # Install kibana node_modules
 RUN apk add --no-cache python ca-certificates build-base \
-  && bash -c 'source $HOME/.bashrc \
+  && su kibana bash -c 'source $HOME/.bashrc \
   && nvm use --delete-prefix $(cat .node-version) --silent \
   && npm install --unsafe-perm' \
   && apk del --purge python
   && rm -rf /tmp/*
+
+USER kibana
 
 ENV PATH /home/kibana/kibana/bin:$PATH
 
