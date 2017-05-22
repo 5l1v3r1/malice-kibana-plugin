@@ -11,7 +11,7 @@ malice UI
 
 #### Requirements
 
--	Kibana 5.1+
+-	Kibana 5.4+
 
 Installation
 ------------

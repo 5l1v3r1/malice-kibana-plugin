@@ -1,21 +1,22 @@
-FROM gliderlabs/alpine:3.4
+FROM alpine:3.5
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ARG VERSION=5.1.2
+ARG VERSION=5.4.0
 
 ENV LANG=C.UTF-8
+ENV NVM=0.33.2
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin
 
-RUN apk-install openjdk8-jre nodejs git bash
+RUN apk add --no-cache openjdk8-jre nodejs git bash
 
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
   && touch /home/kibana/.bashrc \
   && chown kibana /home/kibana/.bashrc
 
-RUN apk-install -t .build-deps wget ca-certificates tar \
-  && wget -q https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh -O /tmp/install.sh \
+RUN apk add --no-cache -t .build-deps wget ca-certificates tar \
+  && wget -q https://raw.githubusercontent.com/creationix/nvm/v$NVM/install.sh -O /tmp/install.sh \
   && chown kibana /tmp/install.sh && chmod +x /tmp/install.sh \
   && su kibana bash -c "/tmp/install.sh" \
   && echo "Installing Kibana $VERSION ======================" \
