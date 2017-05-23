@@ -32,7 +32,7 @@ RUN apk add --no-cache -t .build-dep git bash wget \
     && echo "===> Installing node $(cat .node-version)" \
     && nvm install "$(cat .node-version)"; exit 0 \
     && nvm use --delete-prefix $(cat .node-version) --silent \
-    echo "===> Installing elasticdump" \
+    && echo "===> Installing elasticdump" \
     && npm install elasticdump -g' \
   && apk del --purge .build-dep \
   && rm -rf /tmp/*
@@ -41,10 +41,10 @@ RUN apk add --no-cache -t .build-dep git bash wget \
 RUN apk add --no-cache -t .build-dep python git bash wget build-base \
   && echo "===> Installing Kibana $VERSION" \
   && su kibana bash -c 'source $HOME/.bashrc \
-  && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
-  && cd kibana \
-  && nvm use --delete-prefix $(cat .node-version) --silent \
-  && npm install --unsafe-perm' \
+    && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
+    && cd kibana \
+    && nvm use --delete-prefix $(cat .node-version) --silent \
+    && npm install --unsafe-perm' \
   && apk del --purge .build-dep \
   && rm -rf /tmp/*
 
