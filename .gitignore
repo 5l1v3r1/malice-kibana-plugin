@@ -10,3 +10,5 @@ kibana/
 .DS_Store
 bower_components
 test
+
+*.bu

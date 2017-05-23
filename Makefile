@@ -13,6 +13,9 @@ build: docker ## Build kibana plugin using npm
 	docker exec -it kpbuild bash -c "cd ../plugin && npm run build"; sleep 5
 	docker rm -f kpbuild
 
+size: ## Update docker image SIZE in README
+	sed -i.bu 's/docker%20image-.*-blue/docker%20image-$(shell docker images --format "{{.Size}}" $(REPO)/$(NAME):$(VERSION)| cut -d' ' -f1)%20MB-blue/' README.md
+
 release: ## Create a new release
 	@echo "===> Creating Release"
 	git tag -a ${VERSION} -m ${MESSAGE}
