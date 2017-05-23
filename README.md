@@ -36,13 +36,13 @@ $ docker build -t kplug --build-arg VERSION=$(jq -r '.version' package.json) .
 Start Kibana's Elasticsearch
 
 ```bash
-$ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 kplug
+$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 kplug
 ```
 
 =OR=
 
 ```bash
-$ docker run -d --name plug -v `pwd`:/usr/share/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin
+$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin
 ```
 
 Install plugin `node_modules`
