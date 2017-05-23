@@ -29,6 +29,9 @@ RUN apk add --no-cache -t .build-dep git bash wget \
   && echo "===> Installing NVM" \
   && su kibana bash -c '/tmp/install.sh \
     && source $HOME/.bashrc \
+    && echo "===> Cloning Kibana v$VERSION" \
+    && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
+    && cd kibana \
     && echo "===> Installing node $(cat .node-version)" \
     && nvm install "$(cat .node-version)"; exit 0 \
     && nvm use --delete-prefix $(cat .node-version) --silent \
@@ -41,7 +44,6 @@ RUN apk add --no-cache -t .build-dep git bash wget \
 RUN apk add --no-cache -t .build-dep python git bash wget build-base \
   && echo "===> Installing Kibana $VERSION" \
   && su kibana bash -c 'source $HOME/.bashrc \
-    && git clone -b v${VERSION} https://github.com/elastic/kibana.git \
     && cd kibana \
     && nvm use --delete-prefix $(cat .node-version) --silent \
     && npm install --unsafe-perm' \
