@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin:/home/kibana/kibana/bin:${PATH}
 
-RUN apk add --no-cache openjdk8-jre nodejs ca-certificates git
+RUN apk add --no-cache openjdk8-jre nodejs ca-certificates git bash
 
 # Create kibana user
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
@@ -25,7 +25,7 @@ RUN chown kibana /tmp/install.sh && chmod +x /tmp/install.sh
 WORKDIR /home/kibana
 
 # Install kibana's verion of nodeJS
-RUN apk add --no-cache -t .build-dep bash wget \
+RUN apk add --no-cache wget \
   && echo "===> Installing NVM" \
   && su kibana bash -c '/tmp/install.sh \
     && source $HOME/.bashrc \
@@ -37,13 +37,13 @@ RUN apk add --no-cache -t .build-dep bash wget \
     && nvm use --delete-prefix $(cat .node-version) --silent \
     && echo "===> Installing elasticdump" \
     && npm install elasticdump -g' \
-  && apk del --purge .build-dep \
+  && apk del --purge wget \
   && rm -rf /tmp/*
 
 WORKDIR /home/kibana/kibana
 
 # Install kibana node_modules
-RUN apk add --no-cache -t .build-dep python bash wget build-base \
+RUN apk add --no-cache -t .build-dep python wget build-base \
   && echo "===> Installing Kibana $VERSION" \
   && su kibana bash -c 'source $HOME/.bashrc \
     && nvm use --delete-prefix $(cat .node-version) --silent \
@@ -54,9 +54,10 @@ RUN apk add --no-cache -t .build-dep python bash wget build-base \
 USER kibana
 
 COPY config/kibana.dev.yml /home/kibana/kibana/config/kibana.dev.yml
+COPY entrypoint.sh /entrypoint.sh
 
 VOLUME /home/kibana/plugin
 
 EXPOSE 5601
 
-CMD ["npm","run","elasticsearch"]
+ENTRYPOINT ["/entrypoint.sh"]
