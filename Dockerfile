@@ -34,9 +34,9 @@ RUN apk add --no-cache wget \
     && cd kibana \
     && echo "===> Installing node $(cat .node-version)" \
     && nvm install "$(cat .node-version)"; exit 0 \
-    && nvm use --delete-prefix $(cat .node-version) --silent \
-    && echo "===> Installing elasticdump" \
-    && npm install elasticdump -g' \
+    && nvm use --delete-prefix $(cat .node-version) --silent' \
+  && echo "===> Installing elasticdump" \
+  && npm install elasticdump -g \
   && apk del --purge wget \
   && rm -rf /tmp/*
 
