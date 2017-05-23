@@ -30,19 +30,13 @@ Build docker image
 ```bash
 $ git clone https://github.com/maliceio/malice-kibana-plugin.git
 $ cd malice-kibana-plugin
-$ docker build -t kplug --build-arg VERSION=$(jq -r '.version' package.json) .
+$ make build
 ```
 
 Start Kibana's Elasticsearch
 
 ```bash
-$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 kplug
-```
-
-=OR=
-
-```bash
-$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin
+$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin:5.4.0
 ```
 
 Install plugin `node_modules`
