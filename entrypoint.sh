@@ -4,4 +4,5 @@ set -e
 
 source /home/kibana/.bashrc
 nvm use --delete-prefix $(cat .node-version) --silent
-npm run elasticsearch
+
+exec "$@"

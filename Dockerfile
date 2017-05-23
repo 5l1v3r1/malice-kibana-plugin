@@ -61,3 +61,4 @@ VOLUME /home/kibana/plugin
 EXPOSE 5601
 
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["npm", "run", "elasticsearch"]
