@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin:/home/kibana/kibana/bin:${PATH}
 
-RUN apk add --no-cache openjdk8-jre nodejs ca-certificates
+RUN apk add --no-cache openjdk8-jre nodejs ca-certificates git
 
 # Create kibana user
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
@@ -25,7 +25,7 @@ RUN chown kibana /tmp/install.sh && chmod +x /tmp/install.sh
 WORKDIR /home/kibana
 
 # Install kibana's verion of nodeJS
-RUN apk add --no-cache -t .build-dep git bash wget \
+RUN apk add --no-cache -t .build-dep bash wget \
   && echo "===> Installing NVM" \
   && su kibana bash -c '/tmp/install.sh \
     && source $HOME/.bashrc \
@@ -43,7 +43,7 @@ RUN apk add --no-cache -t .build-dep git bash wget \
 WORKDIR /home/kibana/kibana
 
 # Install kibana node_modules
-RUN apk add --no-cache -t .build-dep python git bash wget build-base \
+RUN apk add --no-cache -t .build-dep python bash wget build-base \
   && echo "===> Installing Kibana $VERSION" \
   && su kibana bash -c 'source $HOME/.bashrc \
     && nvm use --delete-prefix $(cat .node-version) --silent \
