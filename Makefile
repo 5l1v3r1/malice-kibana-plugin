@@ -1,6 +1,6 @@
 REPO=malice
 NAME=kibana-plugin
-VERSION=$(jq -r '.version' package.json)
+VERSION=$(shell jq -r '.version' package.json)
 MESSAGE?="New release"
 
 build: ## Build a new image from the VERSION
