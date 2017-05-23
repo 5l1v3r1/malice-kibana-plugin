@@ -40,11 +40,12 @@ RUN apk add --no-cache -t .build-dep git bash wget \
   && apk del --purge .build-dep \
   && rm -rf /tmp/*
 
+WORKDIR /home/kibana/kibana
+
 # Install kibana node_modules
 RUN apk add --no-cache -t .build-dep python git bash wget build-base \
   && echo "===> Installing Kibana $VERSION" \
   && su kibana bash -c 'source $HOME/.bashrc \
-    && cd kibana \
     && nvm use --delete-prefix $(cat .node-version) --silent \
     && npm install --unsafe-perm' \
   && apk del --purge .build-dep \
