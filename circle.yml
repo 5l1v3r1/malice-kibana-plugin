@@ -14,7 +14,7 @@ dependencies:
 test:
   override:
     - docker run -d --name plug -p 5601:5601 -p 443:443 kibana_plugin; sleep 10
-    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" plug)" -- bash -c "cd /usr/share/kibana && npm run makelogs"
+    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" plug)" -- bash -c "npm run makelogs"
 
 deployment:
   # master:
