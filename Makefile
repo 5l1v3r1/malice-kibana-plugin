@@ -3,9 +3,15 @@ NAME=kibana-plugin
 VERSION=$(shell jq -r '.version' package.json)
 MESSAGE?="New release"
 
-build: ## Build a new image from the VERSION
+docker: ## Build a new image from the VERSION
 	@echo "===> Buidling Image"
 	docker build -t $(REPO)/$(NAME):$(VERSION) --build-arg VERSION=$(VERSION) .
+
+build: ## Build kibana plugin from the VERSION using npm
+	echo "===> Building Plugin"
+	docker run -d --name kpbuild -v `pwd`:/home/kibana/plugin $(REPO)/$(NAME):$(VERSION); sleep 10
+	docker exec -it kpbuild bash -c "cd ../plugin && npm run build"; sleep 5
+	docker rm -f kpbuild
 
 release: ## Create a new release from the VERSION
 	@echo "===> Creating Release"
