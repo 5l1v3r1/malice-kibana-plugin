@@ -1,7 +1,7 @@
 malice UI
 =========
 
-[![Circle CI](https://circleci.com/gh/maliceio/malice-kibana-plugin.png?style=shield)](https://circleci.com/gh/maliceio/malice-kibana-plugin) [![License](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Docker Stars](https://img.shields.io/docker/stars/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/) [![Docker Pulls](https://img.shields.io/docker/pulls/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/) [![Docker Image](https://img.shields.io/badge/docker%20image-1.32%20GB-blue.svg)](https://hub.docker.com/r/malice/kibana-plugin/)
+[![Circle CI](https://circleci.com/gh/maliceio/malice-kibana-plugin.png?style=shield)](https://circleci.com/gh/maliceio/malice-kibana-plugin) [![License](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Docker Stars](https://img.shields.io/docker/stars/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/) [![Docker Pulls](https://img.shields.io/docker/pulls/malice/kibana-plugin.svg)](https://hub.docker.com/r/malice/kibana-plugin/) [![Docker Image](https://img.shields.io/badge/docker%20image-1%20GB-blue.svg)](https://hub.docker.com/r/malice/kibana-plugin/)
 
 > Malice Kibana Plugin
 
