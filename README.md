@@ -17,7 +17,7 @@ Installation
 ------------
 
 ```
-$ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/5.4.0/malice-5.4.0.zip
+$ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/5.4.3/malice-5.4.3.zip
 ```
 
 development
@@ -36,7 +36,7 @@ $ make build
 Start Kibana's Elasticsearch
 
 ```bash
-$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin:5.4.0
+$ docker run -d --name plug -v `pwd`:/home/kibana/plugin -p 5601:5601 -p 443:443 malice/kibana-plugin:5.4.3
 ```
 
 Install plugin `node_modules`
