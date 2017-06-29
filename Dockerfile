@@ -1,14 +1,14 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-ARG VERSION=5.4.0
+ARG VERSION=5.4.3
 
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 ENV PATH=${PATH}:${JAVA_HOME}/bin:/home/kibana/kibana/bin:${PATH}
 
-RUN apk add --no-cache openjdk8-jre nodejs ca-certificates git bash
+RUN apk add --no-cache openjdk8-jre nodejs-current nodejs-current-npm ca-certificates git bash
 
 # Create kibana user
 RUN adduser -S kibana -h /home/kibana -s /bin/bash -G root -u 1000 -D \
