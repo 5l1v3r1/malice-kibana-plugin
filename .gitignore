@@ -1,14 +1,6 @@
 npm-debug.log*
 node_modules
 /build/
-.vagrant
-kibana/
-
-*.log
-.idea
-
 .DS_Store
-bower_components
-test
-
 *.bu
+.OLD

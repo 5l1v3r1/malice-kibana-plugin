@@ -1,4 +1,0 @@
-'update'
-'doctor'
-
-brew 'jq'

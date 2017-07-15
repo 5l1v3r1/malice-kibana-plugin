@@ -3,11 +3,13 @@
 .gitignore
 
 .DS_Store
-build/kibana
-build/malice-0.1.0.zip
-node_modules
+Brewfile
 LICENSE
+Makefile
 README.md
+build*
+es-data*
+.idea*
+.circleci*
+.OLD*
 screen-shot.png
-Vagrantfile
-test
