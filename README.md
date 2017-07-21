@@ -41,7 +41,8 @@ Add some scan data
 $ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
 ```
 
-### start plugin
+start plugin
+------------
 
 ```bash
 $ docker exec -it kplug bash -c "cd ../malice && ./start.sh"
@@ -75,21 +76,21 @@ See the [kibana contributing guide](https://github.com/elastic/kibana/blob/maste
 
 For more information about any of these commands run `npm run ${task} -- --help`.
 
-### Issues
+## issues
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/maliceio/malice-kibana-plugin/issues/new)
 
-### CHANGELOG
+## CHANGELOG
 
 See [`CHANGELOG.md`](https://github.com/maliceio/malice-kibana-plugin/blob/master/CHANGELOG.md)
 
-### Contributing
+## contributing
 
 [See all contributors on GitHub](https://github.com/maliceio/malice-kibana-plugin/graphs/contributors).
 
 Please update the [CHANGELOG.md](https://github.com/maliceio/malice-kibana-plugin/blob/master/CHANGELOG.md) and submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).
 
-### License
+## license
 
 Apache License (Version 2.0)  
 Copyright (c) 2013 - 2017 **blacktop** Joshua Maine
