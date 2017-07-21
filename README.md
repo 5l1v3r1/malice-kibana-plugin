@@ -2,6 +2,7 @@ malice-kibana-plugin
 ====================
 
 [![Circle CI](https://circleci.com/gh/maliceio/malice-kibana-plugin.png?style=shield)](https://circleci.com/gh/maliceio/malice-kibana-plugin) [![License](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
 > Malice Kibana Plugin
 
 ![screen-shot](https://raw.githubusercontent.com/maliceio/malice-kibana-plugin/master/docs/screen-shot.png)
@@ -12,7 +13,7 @@ malice-kibana-plugin
 
 -	Kibana 5.5.0+
 
-Installation
+installation
 ------------
 
 ```
@@ -21,3 +22,55 @@ $ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/rel
 
 development
 -----------
+
+Start Kibana's Elasticsearch
+
+```bash
+$ docker run -d --name kplug -v `pwd`:/plugin/malice -p 5601:5601 -p 443:443 blacktop/kibana-plugin-builder:5.5.0
+```
+
+Install plugin `node_modules`
+
+```bash
+$ docker exec -it kplug bash -c "cd ../malice && npm install"
+```
+
+Add some scan data
+
+```bash
+$ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+```
+
+### start plugin
+
+```bash
+$ docker exec -it kplug bash -c "cd ../malice && ./start.sh"
+```
+
+Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
+
+> **NOTE:** urls will be different every time you start it. Notice the `cqw`
+
+See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following npm tasks.
+
+-	`npm start`
+
+	Start kibana and have it include this plugin
+
+-	`npm start -- --config kibana.yml`
+
+	You can pass any argument that you would normally send to `bin/kibana` by putting them after `--` when running `npm start`
+
+-	`npm run build`
+
+	Build a distributable archive
+
+-	`npm run test:browser`
+
+	Run the browser tests in a real web browser
+
+-	`npm run test:server`
+
+	Run the server tests using mocha
+
+For more information about any of these commands run `npm run ${task} -- --help`.
