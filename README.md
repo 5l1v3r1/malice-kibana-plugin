@@ -74,3 +74,22 @@ See the [kibana contributing guide](https://github.com/elastic/kibana/blob/maste
 	Run the server tests using mocha
 
 For more information about any of these commands run `npm run ${task} -- --help`.
+
+### Issues
+
+Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/maliceio/malice-kibana-plugin/issues/new)
+
+### CHANGELOG
+
+See [`CHANGELOG.md`](https://github.com/maliceio/malice-kibana-plugin/blob/master/CHANGELOG.md)
+
+### Contributing
+
+[See all contributors on GitHub](https://github.com/maliceio/malice-kibana-plugin/graphs/contributors).
+
+Please update the [CHANGELOG.md](https://github.com/maliceio/malice-kibana-plugin/blob/master/CHANGELOG.md) and submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).
+
+### License
+
+Apache License (Version 2.0)  
+Copyright (c) 2013 - 2017 **blacktop** Joshua Maine
