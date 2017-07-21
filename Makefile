@@ -1,7 +1,7 @@
+.PHONY: build size tags tar test run ssh circle push release readme install
+
 REPO=maliceio/malice-kibana-plugin
-ORG=malice
-NAME=malice-kibana-plugin
-BUILDER=malice/kibana-plugin-builder
+BUILDER=blacktop/kibana-plugin-builder
 VERSION?=$(shell jq -r '.version' package.json)
 
 
@@ -10,34 +10,34 @@ readme: ## Update docker image size in README.md
 
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
-	@docker run --init --rm -v `pwd`/malice:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && npm install"
+	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && npm install"
 
 run: stop ## Run malice kibana plugin env
 	@echo "===> Starting kibana elasticsearch..."
-	@docker run --init -d --name kplug -v `pwd`/malice:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
+	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
 	@echo "===> Running kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 
 ssh: ## SSH into docker image
 	@docker run --init -it --rm -v `pwd`:/plugin/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
-plugin: build size install stop ## Build kibana malice plugin
+plugin: install stop ## Build kibana malice plugin
 	@echo "===> Starting kibana elasticsearch..."
-	@docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 :$(VERSION)
+	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
 	@echo "===> Building kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run build"
 	@echo "===> Build complete"
-	@ls -lah malice/build
-	@docker-clean stop
+	@ls -lah build
+	@docker rm -f kplug || true
 
 test: stop ## Test build plugin
 	@echo "===> Starting kibana elasticsearch..."
-	@docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
+	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
 	@echo "===> Testing kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run test:server"
-	@docker-clean stop
+	@docker rm -f kplug || true
 
-release: plugin push ## Create a new release
+release: plugin ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
 	go get github.com/progrium/gh-release/...
@@ -45,8 +45,7 @@ release: plugin push ## Create a new release
 	gh-release create $(REPO) $(VERSION) \
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
-clean: ## Clean builds
-	docker-clean stop
+clean: stop ## Clean builds
 	rm -rf malice/build
 
 stop: ## Kill running kibana-plugin docker containers
@@ -56,5 +55,3 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .DEFAULT_GOAL := help
-
-.PHONY: build size tags tar test run ssh circle push release readme install
