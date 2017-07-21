@@ -1,12 +1,13 @@
 {
   "name": "malice",
-  "version": "5.4.3",
+  "version": "5.5.0",
   "description": "Malice Kibana Plugin",
   "main": "index.js",
   "license": "Apache-2.0",
   "repository": "github:maliceio/malice-kibana-plugin",
   "kibana": {
-    "version": "5.4.3"
+    "version": "5.5.0",
+    "templateVersion": "7.2.0"
   },
   "scripts": {
     "lint": "eslint",
@@ -15,19 +16,17 @@
     "test:browser": "plugin-helpers test:browser",
     "build": "plugin-helpers build",
     "postinstall": "plugin-helpers postinstall",
-    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
-    "getversion": "cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]'"
+    "gather-info": "node gather-info.js"
   },
   "devDependencies": {
-    "@elastic/eslint-config-kibana": "0.0.2",
-    "@elastic/plugin-helpers": "^6.0.0",
-    "babel-eslint": "4.1.8",
-    "bower": "^1.8.0",
-    "chai": "^3.5.0",
-    "eslint": "1.10.3",
-    "eslint-plugin-mocha": "1.1.0"
-  },
-  "dependencies": {
-    "bootstrap": "^3.3.7"
+    "@elastic/eslint-config-kibana": "^0.6.1",
+    "@elastic/plugin-helpers": "^7.0.0",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-react": "^7.0.1",
+    "expect.js": "^0.3.1"
   }
 }

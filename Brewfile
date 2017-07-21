@@ -2,3 +2,4 @@
 'doctor'
 
 brew 'jq'
+brew 'docker-clean'

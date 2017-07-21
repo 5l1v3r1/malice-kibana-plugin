@@ -1,9 +1,10 @@
+import { resolve } from 'path';
 import exampleRoute from './server/routes/example';
 
 export default function (kibana) {
   return new kibana.Plugin({
     require: ['elasticsearch'],
-
+    name: 'malice',
     uiExports: {
 
       app: {
@@ -12,6 +13,11 @@ export default function (kibana) {
         main: 'plugins/malice/app',
         icon: 'plugins/malice/icon.svg'
       },
+
+
+      translations: [
+        resolve(__dirname, './translations/es.json')
+      ],
 
 
       hacks: [

@@ -1,4 +1,0 @@
-export NVM_DIR="/home/kibana/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-nvm use --delete-prefix v6.9.0
