@@ -41,8 +41,7 @@ Add some scan data
 $ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
 ```
 
-start plugin
-------------
+### start plugin
 
 ```bash
 $ docker exec -it kplug bash -c "cd ../malice && ./start.sh"
