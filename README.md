@@ -4,7 +4,7 @@ malice-kibana-plugin
 [![Circle CI](https://circleci.com/gh/maliceio/malice-kibana-plugin.png?style=shield)](https://circleci.com/gh/maliceio/malice-kibana-plugin) [![License](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 > Malice Kibana Plugin
 
-![screen-shot](https://raw.githubusercontent.com/maliceio/malice-kibana-plugin/master/screen-shot.png)
+![screen-shot](https://github.com/maliceio/malice-kibana-plugin/raw/master/docs/screen-shot.png)
 
 ---
 
