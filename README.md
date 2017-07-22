@@ -47,7 +47,7 @@ $ docker run --init -d \
              blacktop/kibana-plugin-builder elasticsearch
 ```
 
-> NOTE: elasticsearch takes a while to start
+> **NOTE:** elasticsearch takes a while to start
 
 Install plugin `node_modules`
 
