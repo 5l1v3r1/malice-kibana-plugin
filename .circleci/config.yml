@@ -21,8 +21,7 @@ jobs:
           no_output_timeout: 1m
           command: |
             set -x
-            export VERSION=$(jq -r '.version' package.json)
-            docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(VERSION) elasticsearch
+            docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(jq -r '.version' package.json) elasticsearch
             docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
             docker exec -it kplug bash -c "cd ../malice && ./start.sh"
             curl --retry 10 --retry-delay 5 -v http://localhost:5601
