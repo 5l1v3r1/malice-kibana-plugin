@@ -40,11 +40,11 @@ Start Kibana's Elasticsearch
 
 ```bash
 $ docker run --init -d \
-						 --name kplug \
-						 -p 9200:9200 \
-						 -p 5601:5601 \
-						 -v `pwd`:/plugin/malice \
-						 blacktop/kibana-plugin-builder elasticsearch
+             --name kplug \
+             -p 9200:9200 \
+             -p 5601:5601 \
+             -v `pwd`:/plugin/malice \
+             blacktop/kibana-plugin-builder elasticsearch
 ```
 
 Install plugin `node_modules`
