@@ -36,7 +36,7 @@ plugin: elasticsearch install stop ## Build kibana malice plugin
 
 test: stop elasticsearch ## Test build plugin
 	@echo "===> Testing kibana plugin..."
-	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run test:browser --force"
+	@sleep 10; docker exec -it -u root kplug bash -c "cd ../malice && apk add --no-cache chromium && npm install karma-chrome-launcher && CHROME_BIN=/usr/bin/chromium-browser npm run test:browser --force"
 	@docker rm -f kplug || true
 
 release: plugin ## Create a new release
