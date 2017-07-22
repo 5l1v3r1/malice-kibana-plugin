@@ -47,13 +47,13 @@ $ docker run --init -d \
              blacktop/kibana-plugin-builder elasticsearch
 ```
 
+> NOTE: elasticsearch takes a while to start
+
 Install plugin `node_modules`
 
 ```bash
 $ docker exec -it kplug bash -c "cd ../malice && npm install"
 ```
-
-> NOTE: elasticsearch takes a while to start
 
 Add some scan data
 
