@@ -62,6 +62,8 @@ Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
 
 > **NOTE:** urls will be different every time you start it. Notice the `cqw`
 
+---
+
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following npm tasks.
 
 -	`npm start`
