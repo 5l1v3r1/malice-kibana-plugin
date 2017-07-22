@@ -67,9 +67,7 @@ Start Kibana Plugin
 docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 ```
 
-Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
-
-> **NOTE:** urls will be different every time you start it. Notice the `cqw`
+Open [https://localhost:5601/](https://localhost:5601/)
 
 ---
 
