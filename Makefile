@@ -12,27 +12,29 @@ install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
 	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && npm install"
 
-run: stop ## Run malice kibana plugin env
+elasticsearch:
 	@echo "===> Starting kibana elasticsearch..."
-	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
+	@docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION) elasticsearch
+
+load-data:
+		@echo "===> Adding data..."
+		@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+
+run: stop elasticsearch load-data ## Run malice kibana plugin env]
 	@echo "===> Running kibana plugin..."
-	@sleep 10; docker exec -it kplug bash -c "cd ../malice && ./start.sh"
+	@docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 
 ssh: ## SSH into docker image
 	@docker run --init -it --rm -v `pwd`:/plugin/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
-plugin: install stop ## Build kibana malice plugin
-	@echo "===> Starting kibana elasticsearch..."
-	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
+plugin: elasticsearch install stop ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run build"
 	@echo "===> Build complete"
 	@ls -lah build
 	@docker rm -f kplug || true
 
-test: stop ## Test build plugin
-	@echo "===> Starting kibana elasticsearch..."
-	docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION)
+test: stop elasticsearch ## Test build plugin
 	@echo "===> Testing kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run test:server"
 	@docker rm -f kplug || true
@@ -46,9 +48,10 @@ release: plugin ## Create a new release
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
 clean: stop ## Clean builds
-	rm -rf malice/build
+	rm -rf build/
 
 stop: ## Kill running kibana-plugin docker containers
+	@echo "===> Stopping kibana elasticsearch..."
 	@docker rm -f kplug || true
 
 help:

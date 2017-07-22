@@ -1,3 +1,3 @@
 #!/bin/sh
 
-npm start -- --config /home/kibana/malice/config/kibana.dev.yml
+npm start -- --config /plugin/malice/config/kibana.dev.yml
