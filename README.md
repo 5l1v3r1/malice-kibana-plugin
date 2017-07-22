@@ -23,28 +23,39 @@ $ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/rel
 development
 -----------
 
+```bash
+$ git clone https://github.com/maliceio/malice-kibana-plugin.git
+$ cd malice-kibana-plugin
+```
+
 Start Kibana's Elasticsearch
 
 ```bash
-$ docker run -d --name kplug -v `pwd`:/plugin/malice -p 5601:5601 -p 443:443 blacktop/kibana-plugin-builder:5.5.0
+$ make elasticsearch
 ```
 
 Install plugin `node_modules`
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../malice && npm install"
+$ make install
 ```
 
 Add some scan data
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+$ make load-data
 ```
 
 ### start plugin
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../malice && ./start.sh"
+$ make run
+```
+
+=OR=
+
+```sh
+docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 ```
 
 Open [https://localhost:5601/cqw](https://localhost:5601/cqw)
