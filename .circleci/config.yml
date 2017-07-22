@@ -23,7 +23,7 @@ jobs:
             docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
             docker exec -d kplug bash -c "cd ../malice && ./start.sh"
             sleep 10
-            curl -k --retry 10 --retry-delay 5 -v https://127.0.0.1:5601
+            curl --retry 10 --retry-delay 10 -k -v https://localhost:5601
       # - deploy:
       #     name: Push application Docker image
       #     command: |
