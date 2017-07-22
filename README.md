@@ -28,24 +28,6 @@ $ git clone https://github.com/maliceio/malice-kibana-plugin.git
 $ cd malice-kibana-plugin
 ```
 
-Start Kibana's Elasticsearch
-
-```bash
-$ make elasticsearch
-```
-
-Install plugin `node_modules`
-
-```bash
-$ make install
-```
-
-Add some scan data
-
-```bash
-$ make load-data
-```
-
 ### start plugin
 
 ```bash
@@ -53,6 +35,33 @@ $ make run
 ```
 
 =OR=
+
+Start Kibana's Elasticsearch
+
+```bash
+$ docker run --init -d \
+						 --name kplug \
+						 -p 9200:9200 \
+						 -p 5601:5601 \
+						 -v `pwd`:/plugin/malice \
+						 blacktop/kibana-plugin-builder elasticsearch
+```
+
+Install plugin `node_modules`
+
+```bash
+$ docker exec -it kplug bash -c "cd ../malice && npm install"
+```
+
+> NOTE: elasticsearch takes a while to start
+
+Add some scan data
+
+```bash
+$ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+```
+
+Start Kibana Plugin
 
 ```sh
 docker exec -it kplug bash -c "cd ../malice && ./start.sh"
