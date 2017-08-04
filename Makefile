@@ -20,7 +20,8 @@ load-data:
 		@echo "===> Adding data..."
 		@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
 
-run: stop elasticsearch load-data ## Run malice kibana plugin env]
+run: stop elasticsearch load-data ## Run malice kibana plugin env
+	@open https://localhost:5601/
 	@echo "===> Running kibana plugin..."
 	@docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 
