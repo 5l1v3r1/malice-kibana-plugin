@@ -28,7 +28,7 @@ run: stop elasticsearch load-data ## Run malice kibana plugin env
 ssh: ## SSH into docker image
 	@docker run --init -it --rm -v `pwd`:/plugin/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
-plugin: elasticsearch install stop ## Build kibana malice plugin
+plugin: elasticsearch install ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run build"
 	@echo "===> Build complete"
@@ -40,7 +40,7 @@ test: stop elasticsearch ## Test build plugin
 	@sleep 10; docker exec -it -u root kplug bash -c "cd ../malice && apk add --no-cache chromium && npm install karma-chrome-launcher && CHROME_BIN=/usr/bin/chromium-browser npm run test:browser --force"
 	@docker rm -f kplug || true
 
-release: plugin ## Create a new release
+release: plugin stop ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
 	go get github.com/progrium/gh-release/...
