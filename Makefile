@@ -28,7 +28,7 @@ run: stop elasticsearch load-data ## Run malice kibana plugin env
 ssh: ## SSH into docker image
 	@docker run --init -it --rm -v `pwd`:/plugin/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
-plugin: elasticsearch install ## Build kibana malice plugin
+plugin: stop elasticsearch install ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run build"
 	@echo "===> Build complete"
