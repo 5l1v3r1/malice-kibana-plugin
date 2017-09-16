@@ -11,7 +11,7 @@ malice-kibana-plugin
 
 #### Requirements
 
--	Kibana 5.5.2+
+-	Kibana 5.6.0+
 
 installation
 ------------
