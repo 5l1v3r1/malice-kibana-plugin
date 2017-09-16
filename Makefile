@@ -7,6 +7,7 @@ VERSION?=$(shell jq -r '.version' package.json)
 
 readme: ## Update docker image size in README.md
 	sed -i.bu 's/-	Kibana.*/-	Kibana $(VERSION)+/' README.md
+	sed -i.bu 's/v.*\/malice-.*/v$(VERSION)\/malice-$(VERSION).zip/' README.md
 
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
@@ -40,7 +41,7 @@ test: stop elasticsearch ## Test build plugin
 	@sleep 10; docker exec -it -u root kplug bash -c "cd ../malice && apk add --no-cache chromium && npm install karma-chrome-launcher && CHROME_BIN=/usr/bin/chromium-browser npm run test:browser --force"
 	@docker rm -f kplug || true
 
-release: plugin stop ## Create a new release
+release: readme plugin stop ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
 	go get github.com/progrium/gh-release/...

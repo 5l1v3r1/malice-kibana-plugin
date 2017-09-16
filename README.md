@@ -17,7 +17,7 @@ installation
 ------------
 
 ```
-$ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/v5.5.0/malice-5.5.0.zip
+$ bin/kibana-plugin install https://github.com/maliceio/malice-kibana-plugin/releases/download/v5.6.0/malice-5.6.0.zip
 ```
 
 development
