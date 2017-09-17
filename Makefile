@@ -18,8 +18,8 @@ elasticsearch:
 	@docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION) elasticsearch
 
 load-data:
-		@echo "===> Adding data..."
-		@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+	@echo "===> Adding data..."
+	@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
 
 run: stop elasticsearch load-data ## Run malice kibana plugin env
 	@open https://localhost:5601/
