@@ -12,6 +12,7 @@ readme: ## Update docker image size in README.md
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
 	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && npm install"
+	@node-prune
 
 elasticsearch:
 	@echo "===> Starting kibana elasticsearch..."
@@ -50,6 +51,7 @@ release: readme plugin stop ## Create a new release
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
 clean: stop ## Clean builds
+	@node-prune
 	rm -rf build/
 
 stop: ## Kill running kibana-plugin docker containers
