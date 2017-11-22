@@ -11,8 +11,7 @@ readme: ## Update docker image size in README.md
 
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
-	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && npm install"
-	@node-prune
+	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && yarn install"
 
 elasticsearch:
 	@echo "===> Starting kibana elasticsearch..."
@@ -32,7 +31,7 @@ ssh: ## SSH into docker image
 
 plugin: stop elasticsearch install ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
-	@sleep 10; docker exec -it kplug bash -c "cd ../malice && npm run build"
+	@sleep 10; docker exec -it kplug bash -c "cd ../malice && yarn run build"
 	@echo "===> Build complete"
 	@ls -lah build
 	@docker rm -f kplug || true
