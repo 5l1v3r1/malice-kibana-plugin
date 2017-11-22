@@ -14,12 +14,12 @@ set_up_elasticsearch
 echo "===> Writting malice sample data to elasticsearch..."
 
 # Load malice test data into elasticsearch
-elasticdump \
-  --input=malice_mapping.json \
-  --output=http://localhost:9200/malice \
-  --type=mapping
-
-elasticdump \
---input=malice_data.json \
---output=http://localhost:9200/malice \
-  --type=data
+# elasticdump \
+#   --input=malice_mapping.json \
+#   --output=http://localhost:9200/malice \
+#   --type=mapping
+#
+# elasticdump \
+# --input=malice_data.json \
+# --output=http://localhost:9200/malice \
+#   --type=data

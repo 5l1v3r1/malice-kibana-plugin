@@ -21,6 +21,7 @@ load-data:
 	@echo "===> Adding data..."
 	@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
 
+# TODO: add load-data back in once I get some new data for ES 6.0
 run: stop elasticsearch load-data ## Run malice kibana plugin env
 	@open https://localhost:5601/
 	@echo "===> Running kibana plugin..."
@@ -50,7 +51,6 @@ release: readme plugin stop ## Create a new release
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
 clean: stop ## Clean builds
-	@node-prune
 	rm -rf build/
 
 stop: ## Kill running kibana-plugin docker containers
