@@ -6,7 +6,7 @@ VERSION?=$(shell jq -r '.version' package.json)
 
 
 readme: ## Update docker image size in README.md
-	sed -i.bu 's/-	Kibana.*/-	Kibana $(VERSION)+/' README.md
+	sed -i.bu 's/\*	Kibana.*/-	Kibana $(VERSION)+/' README.md
 	sed -i.bu 's/v.*\/malice-.*/v$(VERSION)\/malice-$(VERSION).zip/' README.md
 
 install: ## npm install plugin dependancies
