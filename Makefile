@@ -23,7 +23,7 @@ load-data:
 
 # TODO: add load-data back in once I get some new data for ES 6.0
 run: stop elasticsearch load-data ## Run malice kibana plugin env
-	@open https://localhost:5601/
+	@open http://localhost:5601/
 	@echo "===> Running kibana plugin..."
 	@docker exec -it kplug bash -c "cd ../malice && ./start.sh"
 

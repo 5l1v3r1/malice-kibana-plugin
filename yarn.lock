@@ -68,11 +68,10 @@
     glob-all "^3.1.0"
     webpack "3.6.0"
 
-"@elastic/plugin-helpers@^8.0.1":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@elastic/plugin-helpers/-/plugin-helpers-8.1.2.tgz#10fef749cd96786753a74ed8c2b6700f1e6f5f2f"
+"@elastic/plugin-helpers@^7.1.3":
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/@elastic/plugin-helpers/-/plugin-helpers-7.1.4.tgz#91ec2845bd88da383e0ea1d89a87f44264a6fdf3"
   dependencies:
-    argv-split "^2.0.1"
     commander "^2.9.0"
     del "^2.2.2"
     gulp-rename "1.2.2"
@@ -213,10 +212,6 @@ argparse@^1.0.7:
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
   dependencies:
     sprintf-js "~1.0.2"
-
-argv-split@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/argv-split/-/argv-split-2.0.1.tgz#be264117790dbd5ccd63ec3f449a1804814ac4c5"
 
 arr-diff@^1.0.1:
   version "1.1.0"
