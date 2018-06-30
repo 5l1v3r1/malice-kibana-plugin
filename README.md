@@ -10,7 +10,7 @@
 
 #### Requirements
 
-* Kibana 6.1.3+
+- Kibana 6.3.0+
 
 ## installation
 
@@ -41,7 +41,7 @@ $ docker run --init -d \
              --name kplug \
              -p 9200:9200 \
              -p 5601:5601 \
-             -v `pwd`:/plugin/malice \
+             -v `pwd`:/plugin/kibana-extra/malice \
              blacktop/kibana-plugin-builder elasticsearch
 ```
 
@@ -50,48 +50,54 @@ $ docker run --init -d \
 Install plugin `node_modules`
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../malice && npm install"
+$ docker exec -it kplug bash -c "cd ../kibana-extra/malice && npm install"
 ```
 
 Add some scan data
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+$ docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
 ```
 
 Start Kibana Plugin
 
 ```sh
-docker exec -it kplug bash -c "cd ../malice && ./start.sh"
+docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"
 ```
 
 Open [https://localhost:5601/](https://localhost:5601/)
 
 ---
 
-See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following npm tasks.
+See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
-* `npm start`
+- `yarn kbn bootstrap`
 
-  Start kibana and have it include this plugin
+  Install dependencies and crosslink Kibana and all projects/plugins.
 
-* `npm start -- --config kibana.yml`
+  > **_IMPORTANT:_** Use this script instead of `yarn` to install dependencies when switching branches, and re-run it whenever your dependencies change.
 
-  You can pass any argument that you would normally send to `bin/kibana` by putting them after `--` when running `npm start`
+- `yarn start`
 
-* `npm run build`
+  Start kibana and have it include this plugin. You can pass any arguments that you would normally send to `bin/kibana`
 
-  Build a distributable archive
+  ```
+  yarn start --elasticsearch.url http://localhost:9220
+  ```
 
-* `npm run test:browser`
+- `yarn build`
 
-  Run the browser tests in a real web browser
+  Build a distributable archive of your plugin.
 
-* `npm run test:server`
+- `yarn test:browser`
 
-  Run the server tests using mocha
+  Run the browser tests in a real web browser.
 
-For more information about any of these commands run `npm run ${task} -- --help`.
+- `yarn test:server`
+
+  Run the server tests using mocha.
+
+For more information about any of these commands run `yarn ${task} --help`. For a full list of tasks checkout the `package.json` file, or run `yarn run`.
 
 ## issues
 
@@ -109,5 +115,5 @@ Please update the [CHANGELOG.md](https://github.com/maliceio/malice-kibana-plugi
 
 ## license
 
-Apache License (Version 2.0)  
+Apache License (Version 2.0)
 Copyright (c) 2013 - 2018 **blacktop** Joshua Maine

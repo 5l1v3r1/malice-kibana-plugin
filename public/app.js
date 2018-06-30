@@ -1,41 +1,35 @@
-import moment from 'moment';
+import React from 'react';
 import { uiModules } from 'ui/modules';
-import uiRoutes from 'ui/routes';
+import chrome from 'ui/chrome';
+import { render, unmountComponentAtNode } from 'react-dom';
 
 import 'ui/autoload/styles';
 import './less/main.less';
-import template from './templates/index.html';
+import { Main } from './components/main';
 
-document.title = 'Malice - Kibana';
+const app = uiModules.get("apps/malice");
 
-import chrome from 'ui/chrome';
-
-// Set Kibana dark thmeme
-chrome.addApplicationClass('theme-dark');
-
-uiRoutes.enable();
-uiRoutes
-.when('/', {
-  template,
-  resolve: {
-    currentTime($http) {
-      return $http.get('../api/malice/example').then(function (resp) {
-        return resp.data.time;
-      });
-    }
-  }
+app.config($locationProvider => {
+  $locationProvider.html5Mode({
+    enabled: false,
+    requireBase: false,
+    rewriteLinks: false,
+  });
 });
+app.config(stateManagementConfigProvider =>
+  stateManagementConfigProvider.disable()
+);
 
-uiModules
-.get('app/malice', [])
-.controller('maliceHelloWorld', function ($scope, $route, $interval) {
-  $scope.title = 'Malice';
-  $scope.description = 'Malice Kibana Plugin';
+function RootController($scope, $element, $http) {
+  const domNode = $element[0];
 
-  const currentTime = moment($route.current.locals.currentTime);
-  $scope.currentTime = currentTime.format('HH:mm:ss');
-  const unsubscribe = $interval(function () {
-    $scope.currentTime = currentTime.add(1, 'second').format('HH:mm:ss');
-  }, 1000);
-  $scope.$watch('$destroy', unsubscribe);
-});
+  // render react to DOM
+  render(<Main title="malice" httpClient={$http} />, domNode);
+
+  // unmount react on controller destroy
+  $scope.$on('$destroy', () => {
+    unmountComponentAtNode(domNode);
+  });
+}
+
+chrome.setRootController("malice", RootController);

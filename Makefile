@@ -1,47 +1,53 @@
-.PHONY: build size tags tar test run ssh circle push release readme install
-
 REPO=maliceio/malice-kibana-plugin
 BUILDER=blacktop/kibana-plugin-builder
 VERSION?=$(shell jq -r '.version' package.json)
 
-
+.PHONY: readme
 readme: ## Update docker image size in README.md
 	sed -i.bu 's/\*	Kibana.*/-	Kibana $(VERSION)+/' README.md
 	sed -i.bu 's/v.*\/malice-.*/v$(VERSION)\/malice-$(VERSION).zip/' README.md
 
+.PHONY: install
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
-	docker run --init --rm -v `pwd`:/plugin/malice $(BUILDER):$(VERSION) bash -c "cd ../malice && yarn install"
+	docker run --init --rm -v `pwd`:/plugin/kibana-extra/malice $(BUILDER):$(VERSION) bash -c "yarn install"
 
+.PHONY: elasticsearch
 elasticsearch:
 	@echo "===> Starting kibana elasticsearch..."
-	@docker run --init -d --name kplug -v `pwd`:/plugin/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION) elasticsearch
+	@docker run --init -d --name kplug -v `pwd`:/plugin/kibana-extra/malice -p 9200:9200 -p 5601:5601 $(BUILDER):$(VERSION) elasticsearch
 
+.PHONY: load-data
 load-data:
 	@echo "===> Adding data..."
-	@docker exec -it kplug bash -c "cd ../malice/data && ./load-data.sh"
+	@docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
 
 # TODO: add load-data back in once I get some new data for ES 6.0
-run: stop elasticsearch load-data ## Run malice kibana plugin env
+.PHONY: run
+run: stop elasticsearch #load-data ## Run malice kibana plugin env
 	@open http://localhost:5601/
 	@echo "===> Running kibana plugin..."
-	@docker exec -it kplug bash -c "cd ../malice && ./start.sh"
+	@docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"
 
+.PHONY: ssh
 ssh: ## SSH into docker image
-	@docker run --init -it --rm -v `pwd`:/plugin/malice --entrypoint=sh $(BUILDER):$(VERSION)
+	@docker run --init -it --rm -v `pwd`:/plugin/kibana-extra/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
+.PHONY: plugin
 plugin: stop elasticsearch install ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
-	@sleep 10; docker exec -it kplug bash -c "cd ../malice && yarn run build"
+	@sleep 10; docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn run build"
 	@echo "===> Build complete"
 	@ls -lah build
 	@docker rm -f kplug || true
 
+.PHONY: test
 test: stop elasticsearch ## Test build plugin
 	@echo "===> Testing kibana plugin..."
-	@sleep 10; docker exec -it -u root kplug bash -c "cd ../malice && apk add --no-cache chromium && npm install karma-chrome-launcher && CHROME_BIN=/usr/bin/chromium-browser npm run test:browser --force"
+	@sleep 10; docker exec -it -u root kplug bash -c "cd ../kibana-extra/malice && apk add --no-cache chromium && npm install karma-chrome-launcher && CHROME_BIN=/usr/bin/chromium-browser npm run test:browser --force"
 	@docker rm -f kplug || true
 
+.PHONY: release
 release: readme plugin stop ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
@@ -50,13 +56,16 @@ release: readme plugin stop ## Create a new release
 	gh-release create $(REPO) $(VERSION) \
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
+.PHONY: clean
 clean: stop ## Clean builds
 	rm -rf build/
 
+.PHONY: stop
 stop: ## Kill running kibana-plugin docker containers
 	@echo "===> Stopping kibana elasticsearch..."
 	@docker rm -f kplug || true
 
+.PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
