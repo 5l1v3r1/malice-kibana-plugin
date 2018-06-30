@@ -10,7 +10,7 @@ readme: ## Update docker image size in README.md
 .PHONY: install
 install: ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
-	docker run --init --rm -v `pwd`:/plugin/kibana-extra/malice $(BUILDER):$(VERSION) bash -c "yarn install"
+	docker run --init --rm -v `pwd`:/plugin/kibana-extra/malice $(BUILDER):$(VERSION) bash -c "yarn kbn bootstrap"
 
 .PHONY: elasticsearch
 elasticsearch:

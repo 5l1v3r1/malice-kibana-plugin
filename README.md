@@ -50,7 +50,7 @@ $ docker run --init -d \
 Install plugin `node_modules`
 
 ```bash
-$ docker exec -it kplug bash -c "cd ../kibana-extra/malice && npm install"
+$ docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
 ```
 
 Add some scan data
@@ -116,4 +116,4 @@ Please update the [CHANGELOG.md](https://github.com/maliceio/malice-kibana-plugi
 ## license
 
 Apache License (Version 2.0)
-Copyright (c) 2013 - 2018 **blacktop** Joshua Maine
+Copyright (c) 2013 **blacktop** Joshua Maine
