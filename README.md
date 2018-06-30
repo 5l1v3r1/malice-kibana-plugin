@@ -16,7 +16,7 @@
 
 ```
 $ kibana-plugin install \
-         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.1.3/malice-6.1.3.zip
+         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.3.0/malice-6.3.0.zip
 ```
 
 ## development
