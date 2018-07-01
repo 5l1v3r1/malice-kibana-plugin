@@ -103,7 +103,7 @@ For more information about any of these commands run `yarn ${task} --help`. For 
 
 Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/maliceio/malice-kibana-plugin/issues/new)
 
-## CHANGELOG
+## changelog
 
 See [`CHANGELOG.md`](https://github.com/maliceio/malice-kibana-plugin/blob/master/CHANGELOG.md)
 
