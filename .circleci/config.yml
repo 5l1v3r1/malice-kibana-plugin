@@ -19,7 +19,7 @@ jobs:
             docker create -v /plugin/kibana-extra/malice --name kvol alpine:3.6 /bin/true
             docker cp . kvol:/plugin/kibana-extra/malice
             docker run --init -d --name kplug --volumes-from kvol -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder elasticsearch
-            docker exec -it -u root kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
+            # docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"
 
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:browser --force"
@@ -29,7 +29,7 @@ jobs:
           command: |
             set -x
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
-            docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
+            # docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - deploy:
       #     name: Push application Docker image
       #     command: |
