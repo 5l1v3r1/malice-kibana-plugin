@@ -16,6 +16,7 @@ app.config($locationProvider => {
     rewriteLinks: false,
   });
 });
+
 app.config(stateManagementConfigProvider =>
   stateManagementConfigProvider.disable()
 );

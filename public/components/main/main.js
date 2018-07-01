@@ -17,15 +17,16 @@ export class Main extends React.Component {
   }
 
   componentDidMount() {
-    /* 
+    /*
        FOR EXAMPLE PURPOSES ONLY.  There are much better ways to
        manage state and update your UI than this.
     */
     const { httpClient } = this.props;
-    httpClient.get("../api/malice/example").then((resp) => {
+    httpClient.get("../api/malice/example").then(resp => {
       this.setState({ time: resp.data.time });
-    });  
+    });
   }
+
   render() {
     const { title } = this.props;
     return (
@@ -45,7 +46,10 @@ export class Main extends React.Component {
             <EuiPageContentBody>
               <EuiText>
                 <h3>You've successfully created your first Kibana Plugin!</h3>
-                <p>The server time (via API call) is {this.state.time || "NO API CALL YET"}</p>
+                <p>
+                  The server time (via API call) is{" "}
+                  {this.state.time || "NO API CALL YET"}
+                </p>
               </EuiText>
             </EuiPageContentBody>
           </EuiPageContent>
@@ -53,5 +57,4 @@ export class Main extends React.Component {
       </EuiPage>
     );
   }
-  
-};
+}
