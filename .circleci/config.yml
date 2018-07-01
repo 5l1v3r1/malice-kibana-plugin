@@ -28,7 +28,7 @@ jobs:
           name: Run httpie
           command: |
             set -x
-            docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
+            sleep 10; docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
             # docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - deploy:
       #     name: Push application Docker image
