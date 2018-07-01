@@ -4,4 +4,5 @@ extends: "@elastic/kibana"
 settings:
   import/resolver:
     '@elastic/eslint-import-resolver-kibana':
+      kibanaPath: ../../kibana
       rootPackageName: 'malice'

@@ -1,5 +1,12 @@
 import React from "react";
 import {
+  EuiHeader,
+  EuiHeaderBreadcrumbs,
+  EuiHeaderSection,
+  EuiHeaderSectionItem,
+  EuiHeaderSectionItemButton,
+  EuiHeaderLogo,
+  EuiIcon,
   EuiPage,
   EuiPageHeader,
   EuiTitle,
@@ -28,11 +35,79 @@ export class Main extends React.Component {
     });
   }
 
+  renderLogo() {
+    return <EuiHeaderLogo href="#" aria-label="Go to home page" />;
+  }
+
+  renderBreadcrumbs() {
+    const breadcrumbs = [
+      {
+        text: "Management",
+        href: "#",
+        onClick: e => {
+          e.preventDefault();
+          console.log("You clicked management");
+        },
+        "data-test-subj": "breadcrumbsAnimals",
+        className: "customClass"
+      },
+      {
+        text: "Truncation test is here for a really long item",
+        href: "#",
+        onClick: e => {
+          e.preventDefault();
+          console.log("You clicked truncation test");
+        }
+      },
+      {
+        text: "hidden",
+        href: "#",
+        onClick: e => {
+          e.preventDefault();
+          console.log("You clicked hidden");
+        }
+      },
+      {
+        text: "Users",
+        href: "#",
+        onClick: e => {
+          e.preventDefault();
+          console.log("You clicked users");
+        }
+      },
+      {
+        text: "Create"
+      }
+    ];
+
+    return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs} />;
+  }
+
+  renderSearch() {
+    return (
+      <EuiHeaderSectionItemButton aria-label="Search">
+        <EuiIcon type="search" size="m" />
+      </EuiHeaderSectionItemButton>
+    );
+  }
+
   render() {
     const { title } = this.props;
     return (
       <EuiPage>
-        {/* <Header /> */}
+        <EuiHeader>
+          <EuiHeaderSection>
+            <EuiHeaderSectionItem border="right">
+              {this.renderLogo()}
+            </EuiHeaderSectionItem>
+
+            {this.renderBreadcrumbs()}
+          </EuiHeaderSection>
+          <EuiHeaderSection side="right">
+            <EuiHeaderSectionItem>{this.renderSearch()}</EuiHeaderSectionItem>
+          </EuiHeaderSection>
+        </EuiHeader>
+
         <EuiPageHeader>
           <EuiTitle size="l">
             <h1>{title} Hello World!</h1>
