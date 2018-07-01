@@ -1,0 +1,1 @@
+export { EuiTabsExample } from "./tab";
