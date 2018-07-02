@@ -1,11 +1,11 @@
-import React from 'react';
-import { uiModules } from 'ui/modules';
-import chrome from 'ui/chrome';
-import { render, unmountComponentAtNode } from 'react-dom';
+import React from "react";
+import { uiModules } from "ui/modules";
+import chrome from "ui/chrome";
+import { render, unmountComponentAtNode } from "react-dom";
 
-import 'ui/autoload/styles';
-import './less/main.less';
-import { Main } from './components/main';
+import "ui/autoload/styles";
+import "./less/main.less";
+import { Main } from "./components/main";
 
 const app = uiModules.get("apps/malice");
 
@@ -13,7 +13,7 @@ app.config($locationProvider => {
   $locationProvider.html5Mode({
     enabled: false,
     requireBase: false,
-    rewriteLinks: false,
+    rewriteLinks: false
   });
 });
 
@@ -28,7 +28,7 @@ function RootController($scope, $element, $http) {
   render(<Main title="malice" httpClient={$http} />, domNode);
 
   // unmount react on controller destroy
-  $scope.$on('$destroy', () => {
+  $scope.$on("$destroy", () => {
     unmountComponentAtNode(domNode);
   });
 }

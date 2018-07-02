@@ -17,7 +17,7 @@ import {
   EuiText
 } from "@elastic/eui";
 // import { EuiTabsExample } from "../tab";
-import { Header } from "../../views/header/header";
+// import { Header } from "../../views/header/header";
 export class Main extends React.Component {
   constructor(props) {
     super(props);
