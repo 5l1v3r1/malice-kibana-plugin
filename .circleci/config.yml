@@ -8,23 +8,27 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install dependencies
+          name: Install Dependencies
           command: |
             apk add --no-cache curl jq bash
       - run:
-          name: Create node user/group
+          name: Create node User/Group
           command: |
             set -x
             addgroup -g 1000 node
             adduser -D -u 1000 -G node -s /bin/bash node
             chown -R node:node /app
       - run:
-          name: Start Elasticsearch
-          no_output_timeout: 1m
+          name: Create SRC Volume
           command: |
             set -x
             docker create -v /plugin/kibana-extra/malice --name kvol alpine:3.7 /bin/true
             docker cp . kvol:/plugin/kibana-extra/malice
+      - run:
+          name: Start Elasticsearch
+          no_output_timeout: 1m
+          command: |
+            set -x
             docker run --init -d --name kplug --volumes-from kvol -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(jq -r '.version' package.json) elasticsearch; sleep 20
             docker logs kplug
       - run:
