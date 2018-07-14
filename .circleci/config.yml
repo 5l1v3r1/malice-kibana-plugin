@@ -26,11 +26,20 @@ jobs:
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:browser --force"
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:server"
       - run:
-          name: Run httpie
+          name: Check Elasticsearch
           command: |
             set -x
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
-            # docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
+      - run:
+          name: Start Kibana Plugin
+          command: |
+            set -x
+            docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"; sleep 20
+      - run:
+          name: Check Kibana
+          command: |
+            set -x
+            docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - deploy:
       #     name: Push application Docker image
       #     command: |
