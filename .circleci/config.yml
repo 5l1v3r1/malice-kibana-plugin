@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: /app
+    working_directory: /plugin
     docker:
       - image: docker:18.03.1-ce-git
     steps:
@@ -17,13 +17,14 @@ jobs:
             set -x
             addgroup -g 1000 node
             adduser -D -u 1000 -G node -s /bin/bash node
-            chown -R node:node /app
+            chown -R node:node /plugin
+            ls -lah /plugin
       - run:
-          name: Create SRC Volume
+          name: Create src Volume
           command: |
             set -x
             docker create -v /plugin/kibana-extra/malice --name kvol alpine:3.7 /bin/true
-            docker cp . kvol:/plugin/kibana-extra/malice
+            docker cp /plugin kvol:/plugin/kibana-extra/malice
       - run:
           name: Start Elasticsearch
           no_output_timeout: 1m
