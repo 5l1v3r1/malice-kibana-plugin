@@ -42,8 +42,8 @@ jobs:
           command: |
             set -x
             # docker exec -it kplug bash -c "yarn kbn bootstrap"
-            docker exec --user node -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
-            docker exec --user node -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"; sleep 20
+            docker exec --user root -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
+            docker exec --user root -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"; sleep 20
       - run:
           name: Test Kibana
           command: |
