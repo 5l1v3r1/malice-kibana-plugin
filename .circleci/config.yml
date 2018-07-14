@@ -15,8 +15,8 @@ jobs:
           name: Create node user/group
           command: |
             set -x
-            groupadd --gid 1000 node
-            useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+            addgroup -g 1000 node
+            adduser -u 1000 -G node -s /bin/bash node
             chown -R node:node /app
       - run:
           name: Start Elasticsearch
