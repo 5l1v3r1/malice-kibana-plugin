@@ -1,18 +1,18 @@
-import exampleRoute from "./server/routes/example";
+import exampleRoute from './server/routes/example';
 
-export default function(kibana) {
+export default function (kibana) {
   return new kibana.Plugin({
-    require: ["elasticsearch"],
-    name: "malice",
+    require: ['elasticsearch'],
+    name: 'malice',
     uiExports: {
       app: {
-        title: "Malice",
-        description: "Malice Kibana Plugin",
-        icon: "plugins/malice/icon.svg",
-        main: "plugins/malice/app"
+        title: 'Malice',
+        description: 'Malice Kibana Plugin',
+        icon: 'plugins/malice/icon.svg',
+        main: 'plugins/malice/app'
       },
 
-      hacks: ["plugins/malice/hack"]
+      hacks: ['plugins/malice/hack']
     },
 
     config(Joi) {
@@ -23,7 +23,7 @@ export default function(kibana) {
 
     init(server, options) {
       // Add server routes and initialize the plugin here
-      server.log(["status", "info", "malice"], "Malice Initializing...");
+      server.log(['status', 'info', 'malice'], 'Malice Initializing...');
       exampleRoute(server);
     }
   });
