@@ -28,7 +28,7 @@ jobs:
           name: Run httpie
           command: |
             set -x
-            sleep 10; docker logs kplug
+            sleep 20; docker logs kplug
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
             # docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - deploy:
