@@ -10,7 +10,14 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache curl jq
+            apk add --no-cache curl jq bash
+      - run:
+          name: Create node user/group
+          command: |
+            set -x
+            groupadd --gid 1000 node
+            useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+            chown -R node:node /app
       - run:
           name: Start Elasticsearch
           no_output_timeout: 1m
