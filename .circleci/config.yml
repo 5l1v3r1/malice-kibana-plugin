@@ -12,7 +12,7 @@ jobs:
           command: |
             apk add --no-cache curl jq
       - run:
-          name: Run image tests
+          name: Start Elasticsearch
           no_output_timeout: 1m
           command: |
             set -x
@@ -20,13 +20,8 @@ jobs:
             docker cp . kvol:/plugin/kibana-extra/malice
             docker run --init -d --name kplug --volumes-from kvol -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(jq -r '.version' package.json) elasticsearch; sleep 20
             docker logs kplug
-            # docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"
-
-            # docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
-            # docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:browser --force"
-            # docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:server"
       - run:
-          name: Check Elasticsearch
+          name: Test Elasticsearch
           command: |
             set -x
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
@@ -34,21 +29,17 @@ jobs:
           name: Start Kibana Plugin
           command: |
             set -x
-            docker exec -it kplug bash -c "yarn kbn bootstrap"
+            # docker exec -it kplug bash -c "yarn kbn bootstrap"
             docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
             docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"; sleep 20
-
       - run:
-          name: Check Kibana
+          name: Test Kibana
           command: |
             set -x
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
-      # - deploy:
-      #     name: Push application Docker image
+      # - run:
+      #     name: Test Kibana Plugin
       #     command: |
-      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
-      #         login="$(aws ecr get-login)"
-      #         ${login}
-      #         docker tag app "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
-      #         docker push "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
-      #       fi
+      #       set -x
+      #       docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:browser --force"
+      #       docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn test:server"
