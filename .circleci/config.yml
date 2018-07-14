@@ -18,7 +18,8 @@ jobs:
             set -x
             docker create -v /plugin/kibana-extra/malice --name kvol alpine:3.7 /bin/true
             docker cp . kvol:/plugin/kibana-extra/malice
-            docker run --init -d --name kplug --volumes-from kvol -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(jq -r '.version' package.json) elasticsearch
+            docker run --init -d --name kplug --volumes-from kvol -p 9200:9200 -p 5601:5601 blacktop/kibana-plugin-builder:$(jq -r '.version' package.json) elasticsearch; sleep 20
+            docker logs kplug
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice && ./start.sh"
 
             # docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
@@ -28,7 +29,6 @@ jobs:
           name: Run httpie
           command: |
             set -x
-            sleep 20; docker logs kplug
             docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
             # docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - deploy:
