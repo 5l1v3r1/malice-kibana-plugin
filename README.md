@@ -14,22 +14,18 @@
 
 ## installation
 
-```
-$ kibana-plugin install \
+```sh
+kibana-plugin install \
          https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.3.1/malice-6.3.1.zip
 ```
 
 ## development
 
-```bash
-$ git clone https://github.com/maliceio/malice-kibana-plugin.git
-$ cd malice-kibana-plugin
-```
-
-### start plugin
-
-```bash
-$ make run
+```sh
+git clone https://github.com/maliceio/malice-kibana-plugin.git
+cd malice-kibana-plugin
+# start plugin
+make run
 ```
 
 =OR=
@@ -49,14 +45,14 @@ $ docker run --init -d \
 
 Install plugin `node_modules`
 
-```bash
-$ docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
+```sh
+docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn kbn bootstrap"
 ```
 
 Add some scan data
 
-```bash
-$ docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
+```sh
+docker exec -it kplug bash -c "cd ../kibana-extra/malice/data && ./load-data.sh"
 ```
 
 Start Kibana Plugin
