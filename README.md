@@ -10,16 +10,16 @@
 
 #### Requirements
 
-- Kibana 6.3.0+
+- Kibana 6.3.1+
 
 ## installation
 
 ```
 $ kibana-plugin install \
-         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.3.0/malice-6.3.0.zip
+         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.3.1/malice-6.3.1.zip
 ```
 
-## development
+## getting started
 
 ```bash
 $ git clone https://github.com/maliceio/malice-kibana-plugin.git
@@ -69,6 +69,8 @@ Open [https://localhost:5601/](https://localhost:5601/)
 
 ---
 
+## development
+
 See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following yarn scripts.
 
 - `yarn kbn bootstrap`
@@ -81,7 +83,7 @@ See the [kibana contributing guide](https://github.com/elastic/kibana/blob/maste
 
   Start kibana and have it include this plugin. You can pass any arguments that you would normally send to `bin/kibana`
 
-  ```
+  ```sh
   yarn start --elasticsearch.url http://localhost:9220
   ```
 

@@ -4,11 +4,11 @@ VERSION?=$(shell jq -r '.version' package.json)
 
 .PHONY: readme
 readme: ## Update docker image size in README.md
-	sed -i.bu 's/\*	Kibana.*/-	Kibana $(VERSION)+/' README.md
+	sed -i.bu 's/- Kibana [0-9.]\{5\}+/- Kibana $(VERSION)+/' README.md
 	sed -i.bu 's/v.*\/malice-.*/v$(VERSION)\/malice-$(VERSION).zip/' README.md
 
 .PHONY: install
-install: ## npm install plugin dependancies
+install: readme ## npm install plugin dependancies
 	@echo "===> malice-plugin npm install..."
 	docker run --init --rm -v `pwd`:/plugin/kibana-extra/malice $(BUILDER):$(VERSION) bash -c "yarn kbn bootstrap"
 
