@@ -1,12 +1,12 @@
 {
   "name": "malice",
-  "version": "6.3.1",
+  "version": "6.3.2",
   "description": "Malice Kibana Plugin",
   "repository": "github:maliceio/malice-kibana-plugin",
   "license": "Apache-2.0",
   "main": "index.js",
   "kibana": {
-    "version": "6.3.1",
+    "version": "6.3.2",
     "templateVersion": "1.0.0"
   },
   "scripts": {
