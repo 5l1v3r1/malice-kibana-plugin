@@ -1,6 +1,6 @@
 {
   "name": "malice",
-  "version": "0.1.0",
+  "version": "6.4.0",
   "description": "Malice Kibana Plugin",
   "main": "index.js",
   "kibana": {
