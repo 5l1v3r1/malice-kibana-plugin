@@ -1,13 +1,13 @@
-import React from "react";
-import { uiModules } from "ui/modules";
-import chrome from "ui/chrome";
-import { render, unmountComponentAtNode } from "react-dom";
+import React from 'react';
+import { uiModules } from 'ui/modules';
+import chrome from 'ui/chrome';
+import { render, unmountComponentAtNode } from 'react-dom';
 
-import "ui/autoload/styles";
-import "./less/main.less";
-import { Main } from "./components/main";
+import 'ui/autoload/styles';
+import './less/main.less';
+import { Main } from './components/main';
 
-const app = uiModules.get("apps/malice");
+const app = uiModules.get('apps/test');
 
 app.config($locationProvider => {
   $locationProvider.html5Mode({
@@ -16,21 +16,18 @@ app.config($locationProvider => {
     rewriteLinks: false
   });
 });
-
-app.config(stateManagementConfigProvider =>
-  stateManagementConfigProvider.disable()
-);
+app.config(stateManagementConfigProvider => stateManagementConfigProvider.disable());
 
 function RootController($scope, $element, $http) {
   const domNode = $element[0];
 
   // render react to DOM
-  render(<Main title="malice" httpClient={$http} />, domNode);
+  render(<Main title="test" httpClient={$http} />, domNode);
 
   // unmount react on controller destroy
-  $scope.$on("$destroy", () => {
+  $scope.$on('$destroy', () => {
     unmountComponentAtNode(domNode);
   });
 }
 
-chrome.setRootController("malice", RootController);
+chrome.setRootController('test', RootController);
