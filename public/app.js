@@ -5,9 +5,10 @@ import { render, unmountComponentAtNode } from 'react-dom';
 
 import 'ui/autoload/styles';
 import './less/main.less';
+import './less/hack.less';
 import { Main } from './components/main';
 
-const app = uiModules.get('apps/test');
+const app = uiModules.get('apps/malice');
 
 app.config($locationProvider => {
   $locationProvider.html5Mode({
@@ -22,7 +23,7 @@ function RootController($scope, $element, $http) {
   const domNode = $element[0];
 
   // render react to DOM
-  render(<Main title="test" httpClient={$http} />, domNode);
+  render(<Main title="malice" httpClient={$http} />, domNode);
 
   // unmount react on controller destroy
   $scope.$on('$destroy', () => {
@@ -30,4 +31,4 @@ function RootController($scope, $element, $http) {
   });
 }
 
-chrome.setRootController('test', RootController);
+chrome.setRootController('malice', RootController);

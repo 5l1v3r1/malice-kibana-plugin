@@ -10,13 +10,13 @@
 
 #### Requirements
 
-- Kibana 6.4.0+
+- Kibana 6.4.1+
 
 ## installation
 
 ```sh
 kibana-plugin install \
-         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.4.0/malice-6.4.0.zip
+         https://github.com/maliceio/malice-kibana-plugin/releases/download/v6.4.1/malice-6.4.1.zip
 ```
 
 ## development

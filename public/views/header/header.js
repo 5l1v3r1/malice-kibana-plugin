@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import {
   EuiHeader,
@@ -8,10 +8,10 @@ import {
   EuiHeaderSectionItemButton,
   EuiHeaderLogo,
   EuiIcon
-} from "@elastic/eui";
+} from '@elastic/eui';
 
-import HeaderAppMenu from "./header_app_menu";
-import HeaderUserMenu from "./header_user_menu";
+import HeaderAppMenu from './header_app_menu';
+import HeaderUserMenu from './header_user_menu';
 
 export default class extends Component {
   constructor(props) {
@@ -41,41 +41,41 @@ export default class extends Component {
   renderBreadcrumbs() {
     const breadcrumbs = [
       {
-        text: "Management",
-        href: "#",
+        text: 'Management',
+        href: '#',
         onClick: e => {
           e.preventDefault();
-          console.log("You clicked management");
+          console.log('You clicked management');
         },
-        "data-test-subj": "breadcrumbsAnimals",
-        className: "customClass"
+        'data-test-subj': 'breadcrumbsAnimals',
+        className: 'customClass'
       },
       {
-        text: "Truncation test is here for a really long item",
-        href: "#",
+        text: 'Truncation test is here for a really long item',
+        href: '#',
         onClick: e => {
           e.preventDefault();
-          console.log("You clicked truncation test");
+          console.log('You clicked truncation test');
         }
       },
       {
-        text: "hidden",
-        href: "#",
+        text: 'hidden',
+        href: '#',
         onClick: e => {
           e.preventDefault();
-          console.log("You clicked hidden");
+          console.log('You clicked hidden');
         }
       },
       {
-        text: "Users",
-        href: "#",
+        text: 'Users',
+        href: '#',
         onClick: e => {
           e.preventDefault();
-          console.log("You clicked users");
+          console.log('You clicked users');
         }
       },
       {
-        text: "Create"
+        text: 'Create'
       }
     ];
 
@@ -94,9 +94,7 @@ export default class extends Component {
     return (
       <EuiHeader>
         <EuiHeaderSection>
-          <EuiHeaderSectionItem border="right">
-            {this.renderLogo()}
-          </EuiHeaderSectionItem>
+          <EuiHeaderSectionItem border="right">{this.renderLogo()}</EuiHeaderSectionItem>
 
           {this.renderBreadcrumbs()}
         </EuiHeaderSection>
