@@ -7,7 +7,9 @@ import {
   EuiPageContent,
   EuiPageContentHeader,
   EuiPageContentBody,
-  EuiText
+  EuiText,
+  EuiBasicTable,
+  EuiLink
 } from '@elastic/eui';
 
 export class Main extends React.Component {
@@ -26,6 +28,16 @@ export class Main extends React.Component {
       this.setState({ time: resp.data.time });
     });
   }
+
+  // const getCellProps = (item, column) => {
+  //   const { id } = item;
+  //   const { field } = column;
+  //   return {
+  //     className: 'customCellClass',
+  //     'data-test-subj': `cell-${id}-${field}`,
+  //   };
+  // };
+
   render() {
     const { title } = this.props;
     return (
@@ -33,7 +45,7 @@ export class Main extends React.Component {
         <EuiPageBody>
           <EuiPageHeader>
             <EuiTitle size="l">
-              <h1>{title} Hello World!</h1>
+              <h1>{title}</h1>
             </EuiTitle>
           </EuiPageHeader>
           <EuiPageContent>
@@ -49,6 +61,7 @@ export class Main extends React.Component {
               </EuiText>
             </EuiPageContentBody>
           </EuiPageContent>
+          {/* <EuiBasicTable items={items} columns={columns} rowProps={getRowProps} cellProps={getCellProps} /> */}
         </EuiPageBody>
       </EuiPage>
     );

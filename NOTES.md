@@ -2,6 +2,10 @@
 
 ## UI Ideas
 
+### Elastic UI framework
+
+- https://elastic.github.io/eui/#/
+
 ### Grids
 
 - <https://github.com/haltu/muuri>
