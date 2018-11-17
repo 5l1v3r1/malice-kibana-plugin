@@ -9,11 +9,10 @@ export default function (kibana) {
         title: 'Malice',
         description: 'Malice Kibana Plugin',
         icon: 'plugins/malice/icon.svg',
-        main: 'plugins/malice/app',
-        styleSheetPath: require('path').resolve(__dirname, 'public/app.scss')
+        main: 'plugins/malice/app'
       },
-
-      hacks: ['plugins/malice/hack']
+      hacks: ['plugins/malice/hack'],
+      styleSheetPaths: require('path').resolve(__dirname, 'public/app.scss')
     },
 
     config(Joi) {
