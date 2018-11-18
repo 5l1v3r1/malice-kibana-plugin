@@ -7,9 +7,13 @@ import {
   EuiPageContent,
   EuiPageContentHeader,
   EuiPageContentBody,
+  EuiButton,
+  EuiImage,
   EuiText
 } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_dark.css';
+import { Crumbs } from '../nav/breadcrumbs';
+import logoUrl from 'plugins/malice/logo.png';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -34,24 +38,30 @@ export class Main extends React.Component {
       <EuiPage>
         <EuiPageBody>
           <EuiPageHeader>
-            <EuiTitle size="l">
+            <Crumbs />
+            <EuiImage size="original" hasShadow alt="Malice logo" url={logoUrl} />
+            {/* <EuiTitle size="l">
               <h1>{title}</h1>
-            </EuiTitle>
+            </EuiTitle> */}
           </EuiPageHeader>
           <EuiPageContent>
             <EuiPageContentHeader>
               <EuiTitle>
-                <h2>Congratulations</h2>
+                <h2>SEARCH</h2>
               </EuiTitle>
             </EuiPageContentHeader>
             <EuiPageContentBody>
               <EuiText>
-                <h3>You have successfully created your first Kibana Plugin!</h3>
+                <h3>Search a URL, IP address, domain, or file hash</h3>
                 <p>The server time (via API call) is {this.state.time || 'NO API CALL YET'}</p>
               </EuiText>
             </EuiPageContentBody>
           </EuiPageContent>
+          <EuiButton fill onClick={() => window.alert('Button clicked')}>
+            Search
+          </EuiButton>
         </EuiPageBody>
+        {/* <Search /> */}
         {/* <Toast /> */}
       </EuiPage>
     );
