@@ -7,10 +7,9 @@ import {
   EuiPageContent,
   EuiPageContentHeader,
   EuiPageContentBody,
-  EuiText,
-  EuiBasicTable,
-  EuiLink
+  EuiText
 } from '@elastic/eui';
+import '@elastic/eui/dist/eui_theme_dark.css';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -28,15 +27,6 @@ export class Main extends React.Component {
       this.setState({ time: resp.data.time });
     });
   }
-
-  // const getCellProps = (item, column) => {
-  //   const { id } = item;
-  //   const { field } = column;
-  //   return {
-  //     className: 'customCellClass',
-  //     'data-test-subj': `cell-${id}-${field}`,
-  //   };
-  // };
 
   render() {
     const { title } = this.props;
@@ -61,8 +51,8 @@ export class Main extends React.Component {
               </EuiText>
             </EuiPageContentBody>
           </EuiPageContent>
-          {/* <EuiBasicTable items={items} columns={columns} rowProps={getRowProps} cellProps={getCellProps} /> */}
         </EuiPageBody>
+        {/* <Toast /> */}
       </EuiPage>
     );
   }
