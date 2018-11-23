@@ -13,7 +13,7 @@ import {
 } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_dark.css';
 import { Crumbs } from '../nav/breadcrumbs';
-import logoUrl from 'plugins/malice/logo.png';
+import logoUrl from 'plugins/malice/malice.svg';
 
 export class Main extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export class Main extends React.Component {
         <EuiPageBody>
           <EuiPageHeader>
             <Crumbs />
-            <EuiImage size="original" hasShadow alt="Malice logo" url={logoUrl} />
+            <EuiImage size="s" hasShadow alt="Malice logo" url={logoUrl} />
             {/* <EuiTitle size="l">
               <h1>{title}</h1>
             </EuiTitle> */}
