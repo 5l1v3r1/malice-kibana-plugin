@@ -27,8 +27,9 @@ export class Main extends React.Component {
        manage state and update your UI than this.
     */
     const { httpClient } = this.props;
-    httpClient.get('../api/malice/example').then(resp => {
-      this.setState({ time: resp.data.time });
+    httpClient.get('../api/malice/search').then(resp => {
+      console.log(resp.data.hits.hits[0]._source);
+      this.setState({ time: resp.data.hits.total });
     });
   }
 
