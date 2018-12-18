@@ -38,7 +38,7 @@ ssh: ## SSH into docker image
 	@docker run --init -it --rm -v `pwd`:/plugin/kibana-extra/malice --entrypoint=sh $(BUILDER):$(VERSION)
 
 .PHONY: plugin
-plugin: stop elasticsearch ## Build kibana malice plugin
+plugin: stop elasticsearch install ## Build kibana malice plugin
 	@echo "===> Building kibana plugin..."
 	@sleep 10; docker exec -it kplug bash -c "cd ../kibana-extra/malice && yarn run build"
 	@echo "===> Build complete"
