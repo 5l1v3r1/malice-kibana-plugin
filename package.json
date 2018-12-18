@@ -1,10 +1,10 @@
 {
   "name": "malice",
-  "version": "6.5.2",
+  "version": "6.5.3",
   "description": "Malice Kibana Plugin",
   "main": "index.js",
   "kibana": {
-    "version": "6.5.2",
+    "version": "6.5.3",
     "templateVersion": "1.0.0"
   },
   "scripts": {
