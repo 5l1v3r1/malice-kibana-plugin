@@ -3,20 +3,18 @@ export default function (server) {
     path: '/api/malice/search',
     method: 'GET',
     handler(req, reply) {
-      console.log(req.headers);
+      // console.log('req', req);
+      const { query } = req.query;
+      console.log('query', query);
+      console.log('typeof query', typeof query);
       server.plugins.elasticsearch
         .getCluster('data')
         .callWithRequest(req, 'search', {
           index: 'malice',
           type: 'samples',
-          body: {
-            query: {
-              match_all: {}
-            }
-          }
+          q: query || '*'
         })
         .then(function (result) {
-          console.log(result);
           reply(null, result);
         })
         .catch(function (ex) {

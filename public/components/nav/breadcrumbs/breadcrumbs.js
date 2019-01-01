@@ -1,34 +1,41 @@
 import React, { Fragment } from 'react';
 
-import { EuiBreadcrumbs, EuiShowFor, EuiText } from '@elastic/eui';
+import { EuiBreadcrumbs, EuiButton, EuiPageContentHeader, EuiPageContentHeaderSection, EuiTitle, EuiSpacer } from '@elastic/eui';
 
 export default () => {
   const breadcrumbs = [
     {
       text: 'Search',
-      href: '#'
-    },
-    {
-      text: 'Filter',
-      href: '#'
-    },
-    {
-      text: 'Report',
-      href: '#'
+      href: '#search',
+      onClick: e => {
+        e.preventDefault();
+        console.log('You clicked Search');
+      },
+      'data-test-subj': 'breadcrumbsAnimals',
+      className: 'customClass'
     }
+    // {
+    //   text: 'Filter',
+    //   href: '#filter',
+    //   onClick: e => {
+    //     e.preventDefault();
+    //     console.log('You clicked Filter');
+    //   }
+    // },
+    // {
+    //   text: 'Report',
+    //   href: '#report',
+    //   onClick: e => {
+    //     e.preventDefault();
+    //     console.log('You clicked Report');
+    //   }
+    // }
   ];
 
   return (
     <Fragment>
-      <EuiBreadcrumbs breadcrumbs={breadcrumbs} max={null} />
-
-      <EuiShowFor sizes={['xs', 's']}>
-        <EuiText size="s" color="subdued">
-          <p>
-            <em>Responsive nav does not show at all on small (mobile) screens.</em>
-          </p>
-        </EuiText>
-      </EuiShowFor>
+      <EuiBreadcrumbs breadcrumbs={breadcrumbs} responsive={true} truncate={false} />
+      <EuiSpacer size="xs" />
     </Fragment>
   );
 };

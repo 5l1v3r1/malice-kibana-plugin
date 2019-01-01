@@ -6,7 +6,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import 'ui/autoload/styles';
 import './less/main.less';
 import './less/hack.less';
-import { Main } from './components/main';
+import { Main } from './containers/Main/Main';
 
 const app = uiModules.get('apps/malice');
 

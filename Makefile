@@ -54,7 +54,7 @@ test: stop elasticsearch ## Test build plugin
 	@docker rm -f kplug || true
 
 .PHONY: release
-release: readme plugin stop ## Create a new release
+release: readme stop ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
 	go get github.com/progrium/gh-release/...
