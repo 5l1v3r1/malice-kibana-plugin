@@ -36,7 +36,7 @@ jobs:
           name: Test Elasticsearch
           command: |
             set -x
-            docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
+            sleep 15; docker run --rm --network container:kplug blacktop/httpie GET http://localhost:9200
       - run:
           name: Start Kibana Plugin
           command: |
@@ -47,7 +47,7 @@ jobs:
           name: Test Kibana
           command: |
             set -x
-            docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
+            sleep 15; docker run --rm --network container:kplug blacktop/httpie GET http://localhost:5601
       # - run:
       #     name: Test Kibana Plugin
       #     command: |
