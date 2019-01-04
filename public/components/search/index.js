@@ -1,2 +1,2 @@
-import Search from './search';
-export { Search };
+import SearchForm from './search';
+export { SearchForm };

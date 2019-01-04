@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import { EuiFieldSearch, EuiRange, EuiTextArea, EuiFormRow, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiButton } from '@elastic/eui';
 
-export default class Search extends Component {
+export default class SearchForm extends Component {
   state = { query: this.props.query };
 
   onFormSubmit = event => {
