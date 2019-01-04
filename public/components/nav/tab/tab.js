@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { EuiTabbedContent, EuiTitle, EuiText, EuiSpacer } from '@elastic/eui';
 
 import { Detection } from '../../analysis/Detection';
-
+import { Details } from '../../analysis/Details';
 class Tabs extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +31,8 @@ class Tabs extends Component {
             <EuiTitle>
               <h3>Details</h3>
             </EuiTitle>
-            <EuiText>Scan Details.</EuiText>
+            <EuiSpacer size="l" />
+            <Details plugins={this.props.data.plugins} />
           </Fragment>
         )
       },
@@ -44,7 +45,7 @@ class Tabs extends Component {
             <EuiTitle>
               <h3>Community</h3>
             </EuiTitle>
-            <EuiText>Community voting</EuiText>
+            <EuiText>Community voting (COMING SOON!)</EuiText>
           </Fragment>
         )
       }
