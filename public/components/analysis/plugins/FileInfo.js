@@ -1,15 +1,17 @@
-import React from 'react';
-import { EuiSpacer, EuiAccordion, EuiDescriptionList, EuiHorizontalRule } from '@elastic/eui';
+import React, { Fragment } from 'react';
+import { EuiText, EuiSpacer, EuiAccordion, EuiDescriptionList, EuiHorizontalRule } from '@elastic/eui';
 import { TrID } from './TrID';
 
 export function FileInfo({ fileinfo }) {
   const exiftoolData = [];
 
   Object.keys(fileinfo.exiftool).map(function (key) {
-    exiftoolData.push({
-      title: key,
-      description: fileinfo.exiftool[key]
-    });
+    if (fileinfo.exiftool[key]) {
+      exiftoolData.push({
+        title: key,
+        description: fileinfo.exiftool[key]
+      });
+    }
   });
 
   const fileSummary = [
@@ -28,10 +30,12 @@ export function FileInfo({ fileinfo }) {
   ];
 
   return (
-    <div>
-      <div>
-        <EuiDescriptionList listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
-      </div>
+    <Fragment>
+      <EuiText>
+        <h4>File Info</h4>
+      </EuiText>
+      <EuiSpacer />
+      <EuiDescriptionList listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
       <EuiSpacer />
       <TrID trid={fileinfo.trid} />
       <EuiHorizontalRule />
@@ -39,6 +43,6 @@ export function FileInfo({ fileinfo }) {
         <EuiDescriptionList type="column" listItems={exiftoolData} style={{ maxWidth: '400' }} compressed />
       </EuiAccordion>
       <EuiHorizontalRule />
-    </div>
+    </Fragment>
   );
 }

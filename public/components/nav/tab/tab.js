@@ -3,6 +3,8 @@ import { EuiTabbedContent, EuiTitle, EuiText, EuiSpacer } from '@elastic/eui';
 
 import { Detection } from '../../analysis/Detection';
 import { Details } from '../../analysis/Details';
+import { Intel } from '../../analysis/Intel';
+
 class Tabs extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +16,9 @@ class Tabs extends Component {
         content: (
           <Fragment>
             <EuiSpacer />
-            <EuiTitle>
-              <h3>AV Detection</h3>
-            </EuiTitle>
+            <EuiText>
+              <h4>ANTIVIRUS</h4>
+            </EuiText>
             <EuiSpacer size="l" />
             <Detection av={this.props.data.plugins.av} />
           </Fragment>
@@ -27,12 +29,18 @@ class Tabs extends Component {
         name: 'Details',
         content: (
           <Fragment>
-            <EuiSpacer />
-            <EuiTitle>
-              <h3>Details</h3>
-            </EuiTitle>
             <EuiSpacer size="l" />
             <Details plugins={this.props.data.plugins} />
+          </Fragment>
+        )
+      },
+      {
+        id: 'intel',
+        name: 'Intel',
+        content: (
+          <Fragment>
+            <EuiSpacer size="l" />
+            <Intel intel={this.props.data.plugins.intel} />
           </Fragment>
         )
       },
