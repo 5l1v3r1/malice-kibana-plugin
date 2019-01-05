@@ -27,7 +27,7 @@ export function Detection({ av }) {
       sortable: true,
       render: result => {
         const color = result ? 'danger' : 'success';
-        const label = result ? result : 'CLEAN';
+        const label = result ? result : 'Clean';
         return <EuiHealth color={color}>{label}</EuiHealth>;
       }
     },
