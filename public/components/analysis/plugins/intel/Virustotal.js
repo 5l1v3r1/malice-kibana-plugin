@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { EuiLink, EuiTextColor, EuiText, EuiInMemoryTable } from '@elastic/eui';
+import { EuiLink, EuiTextColor, EuiInMemoryTable, EuiAccordion } from '@elastic/eui';
 
 export const Virustotal = ({ vt }) => {
   const items = [
@@ -41,10 +41,9 @@ export const Virustotal = ({ vt }) => {
 
   return (
     <Fragment>
-      <EuiText>
-        <h4>Virustotal</h4>
-      </EuiText>
-      <EuiInMemoryTable items={items} columns={columns} />
+      <EuiAccordion id="accordion-virustotal" buttonContent="Virustotal" initialIsOpen={true} paddingSize="m">
+        <EuiInMemoryTable items={items} columns={columns} />
+      </EuiAccordion>
     </Fragment>
   );
 };

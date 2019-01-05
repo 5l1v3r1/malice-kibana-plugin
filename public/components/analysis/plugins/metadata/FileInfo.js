@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { EuiText, EuiSpacer, EuiAccordion, EuiDescriptionList, EuiHorizontalRule } from '@elastic/eui';
+import { EuiSpacer, EuiAccordion, EuiDescriptionList, EuiHorizontalRule } from '@elastic/eui';
 import { TrID } from './TrID';
 
 export function FileInfo({ fileinfo }) {
@@ -31,18 +31,16 @@ export function FileInfo({ fileinfo }) {
 
   return (
     <Fragment>
-      <EuiText>
-        <h4>File Info</h4>
-      </EuiText>
-      <EuiSpacer />
-      <EuiDescriptionList listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
-      <EuiSpacer />
-      <TrID trid={fileinfo.trid} />
-      <EuiHorizontalRule />
-      <EuiAccordion id="accordion-basic-props" buttonContent="ExifTool File Metadata" initialIsOpen={true} paddingSize="m">
-        <EuiDescriptionList type="column" listItems={exiftoolData} style={{ maxWidth: '400' }} compressed />
+      <EuiAccordion id="accordion-fileinfo" buttonContent="File Info" initialIsOpen={true} paddingSize="m">
+        <EuiDescriptionList listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
+        <EuiSpacer />
+        <TrID trid={fileinfo.trid} />
+        <EuiHorizontalRule />
+        <EuiAccordion id="accordion-basic-props" buttonContent="ExifTool File Metadata" initialIsOpen={true} paddingSize="m">
+          <EuiDescriptionList type="column" listItems={exiftoolData} style={{ maxWidth: '400' }} compressed />
+        </EuiAccordion>
+        <EuiHorizontalRule />
       </EuiAccordion>
-      <EuiHorizontalRule />
     </Fragment>
   );
 }

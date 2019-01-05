@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { EuiSpacer, EuiHealth, EuiText, EuiTextColor, EuiInMemoryTable, EuiDescriptionList } from '@elastic/eui';
+import { EuiSpacer, EuiHealth, EuiTextColor, EuiInMemoryTable, EuiDescriptionList, EuiAccordion } from '@elastic/eui';
 
 export const ShadowServer = ({ ss }) => {
   const avResults = [];
@@ -57,19 +57,18 @@ export const ShadowServer = ({ ss }) => {
 
   return (
     <Fragment>
-      <EuiText>
-        <h4>Shadow Server</h4>
-      </EuiText>
-      <EuiSpacer />
-      <EuiTextColor color="subdued">
-        <h6>Meta Data</h6>
-      </EuiTextColor>
-      <EuiDescriptionList type="column" listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
-      <EuiSpacer />
-      <EuiTextColor color="subdued">
-        <h6>ANTIVIRUS</h6>
-      </EuiTextColor>
-      <EuiInMemoryTable items={avResults} columns={columns} />
+      <EuiAccordion id="accordion-ss" buttonContent="Shadow Server" initialIsOpen={true} paddingSize="m">
+        <EuiSpacer />
+        <EuiTextColor color="subdued">
+          <h6>Meta Data</h6>
+        </EuiTextColor>
+        <EuiDescriptionList type="column" listItems={fileSummary} style={{ maxWidth: '400' }} compressed />
+        <EuiSpacer />
+        <EuiTextColor color="subdued">
+          <h6>ANTIVIRUS</h6>
+        </EuiTextColor>
+        <EuiInMemoryTable items={avResults} columns={columns} />
+      </EuiAccordion>
     </Fragment>
   );
 };
