@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { EuiText, EuiHealth, EuiAccordion } from '@elastic/eui';
 
 export const Nsrl = ({ nsrl }) => {
+  if (!nsrl) return <Fragment />;
   const color = nsrl.found ? 'success' : 'subdued';
   const label = nsrl.found ? 'CLEAN' : 'Unknown';
 

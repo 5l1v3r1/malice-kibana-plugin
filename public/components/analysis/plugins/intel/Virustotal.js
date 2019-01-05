@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import { EuiLink, EuiTextColor, EuiInMemoryTable, EuiAccordion } from '@elastic/eui';
 
 export const Virustotal = ({ vt }) => {
+  if (!vt) return <Fragment />;
+
   const items = [
     {
       ratio: `${Math.floor((vt.positives / vt.total) * 100)}`,

@@ -5,6 +5,10 @@ import { PdfId } from './PDFiD';
 import { PdfParser } from './PdfParser';
 
 export const Pdf = ({ pdf }) => {
+  if (!pdf) {
+    return <Fragment />;
+  }
+
   return (
     <Fragment>
       <EuiAccordion id="accordion-pdf" buttonContent="PDF" initialIsOpen={true} paddingSize="m">
