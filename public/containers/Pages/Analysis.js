@@ -6,12 +6,11 @@ import {
   EuiPageContentHeaderSection,
   EuiPageContentBody,
   EuiSpacer,
-  EuiPanel,
-  EuiText
+  EuiPanel
 } from '@elastic/eui';
 
-import { FileSummary } from '../../../components/analysis/file';
-import { Tabs } from '../../../components/nav/tab';
+import { FileSummary } from '../../components/analysis/FileSummary';
+import { Tabs } from '../../components/nav/tab';
 
 export class Analysis extends Component {
   state = { data: null };
@@ -33,7 +32,7 @@ export class Analysis extends Component {
       return (
         <div className="euiFlexItem">
           <EuiPanel paddingSize="s">
-            <FileSummary file={data.file} scan_date={data.scan_date} />
+            <FileSummary file={data.file} scanDate={data.scan_date} />
           </EuiPanel>
           <EuiSpacer size="l" />
           <Tabs data={data} />

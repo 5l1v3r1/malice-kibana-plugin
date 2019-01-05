@@ -2,7 +2,7 @@ import React from 'react';
 import { EuiDescriptionList } from '@elastic/eui';
 import moment from 'moment';
 
-function FileSummary({ file, scan_date }) {
+export function FileSummary({ file, scanDate }) {
   console.log('file :', file);
   const fileSummary = [
     {
@@ -27,7 +27,7 @@ function FileSummary({ file, scan_date }) {
     },
     {
       title: 'Scan Date',
-      description: moment.utc(scan_date).fromNow()
+      description: moment.utc(scanDate).fromNow()
     }
   ];
 
@@ -37,5 +37,3 @@ function FileSummary({ file, scan_date }) {
     </div>
   );
 }
-
-export default FileSummary;

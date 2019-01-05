@@ -6,7 +6,7 @@ import '@elastic/eui/dist/eui_theme_dark.css';
 // import { SavedObjectsClient } from 'ui/saved_objects';
 import { Crumbs } from '../components/nav/breadcrumbs';
 import { Search } from './Pages/Search';
-import { Analysis } from './Pages/Analysis/Analysis';
+import { Analysis } from './Pages/Analysis';
 import logoUrl from '../malice.svg';
 
 export class Main extends React.Component {
