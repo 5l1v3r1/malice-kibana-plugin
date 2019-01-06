@@ -1,39 +1,50 @@
-import React, { Fragment } from 'react';
-import { EuiText, EuiCode, EuiAccordion } from '@elastic/eui';
+import React, { Fragment } from "react";
+import { EuiPanel, EuiHorizontalRule, EuiAccordion } from "@elastic/eui";
+
+import { PEHeader } from "./PEHeader";
+import { PESections } from "./PESections";
+import { PEImports } from "./PEImports";
+import { PEResources } from "./PEResources";
+import { PEDataDirectories } from "./PEDataDirectories";
+import { PEFileVersionInfo } from "./PEFileVersionInfo";
+import { PESignature } from "./PESignature";
+import { PEiD } from "./PEiD";
 
 export const PEScan = ({ pescan }) => {
+  console.log("pescan", pescan);
   if (!pescan) {
     return <Fragment />;
   }
 
-  const renderImports = imports => {
-    const dlls = Object.keys(imports).map(function (key) {
-      const items = imports[key].map(s => {
-        return <li key={s.name}>{s.name}</li>;
-      });
-      return (
-        <Fragment>
-          <EuiAccordion id={key} buttonContent={key} initialIsOpen={false} paddingSize="m">
-            {<ul>{items}</ul>}
-          </EuiAccordion>
-        </Fragment>
-      );
-    });
-
-    return (
-      <Fragment>
-        <EuiText>
-          <h4>Imports</h4>
-          <div className="imports-list">{dlls}</div>
-        </EuiText>
-      </Fragment>
-    );
-  };
-
   return (
     <Fragment>
-      <EuiAccordion id="accordion-pescan" buttonContent="Portable Executable Info" initialIsOpen={true} paddingSize="m">
-        {renderImports(pescan.imports)}
+      <EuiAccordion
+        id="accordion-pescan"
+        buttonContent="Portable Executable Info"
+        initialIsOpen={true}
+        paddingSize="m"
+      >
+        <EuiPanel hasShadow>
+          <PEHeader info={pescan.info} />
+          <EuiHorizontalRule />
+          <PEiD
+            peid={pescan.peid}
+            isPacked={pescan.is_packed}
+            language={pescan.language}
+          />
+          <EuiHorizontalRule />
+          <PESections sections={pescan.sections} />
+          <EuiHorizontalRule />
+          <PEImports imphash={pescan.imphash} imports={pescan.imports} />
+          <EuiHorizontalRule />
+          <PEResources resources={pescan.resources} />
+          <EuiHorizontalRule />
+          <PEDataDirectories dataDirs={pescan.data_directories} />
+          <EuiHorizontalRule />
+          <PEFileVersionInfo verInfo={pescan.resource_versioninfo} />
+          <EuiHorizontalRule />
+          <PESignature signature={pescan.signature} />
+        </EuiPanel>
       </EuiAccordion>
     </Fragment>
   );

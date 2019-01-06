@@ -1,56 +1,59 @@
-import React, { Fragment } from 'react';
-import { EuiAccordion, EuiInMemoryTable } from '@elastic/eui';
+import React, { Fragment } from "react";
+import { EuiText, EuiPanel, EuiSpacer, EuiInMemoryTable } from "@elastic/eui";
+import _ from "lodash";
 
 export const Yara = ({ yara }) => {
   if (!yara) {
     return <Fragment />;
   }
 
-  const yaraResults = [];
-  Object.keys(yara).map(function (key) {
-    yaraResults.push({
-      name: key,
-      result: yara[key]
-    });
-  });
-
   const columns = [
     {
-      field: 'rule',
-      name: 'Rule',
+      field: "Rule",
+      name: "Rule",
       sortable: true
     },
     {
-      field: 'description',
-      name: 'Description',
-      truncateText: true,
-      sortable: true
+      field: "Meta.description",
+      name: "Description"
     },
     {
-      field: 'offset',
-      name: 'Offset',
-      truncateText: true,
-      sortable: true
+      field: "Strings[0].Offset",
+      name: "Offset"
     },
     {
-      field: 'data',
-      name: 'Data',
-      truncateText: true,
-      sortable: true
-    },
-    {
-      field: 'tags',
-      name: 'Tags',
-      truncateText: true,
-      sortable: true
+      field: "Strings[0].Data",
+      name: "Data",
+      truncateText: true
     }
+    // {
+    //   field: "Tags",
+    //   name: "Tags",
+    //   truncateText: true,
+    //   sortable: true
+    // }
   ];
+
+  const sorting = {
+    sort: {
+      field: "Rule",
+      direction: "dec"
+    }
+  };
 
   return (
     <Fragment>
-      <EuiAccordion id="accordion-yara" buttonContent="Yara" initialIsOpen={true} paddingSize="m">
-        <EuiInMemoryTable items={yaraResults} columns={columns} />
-      </EuiAccordion>
+      <EuiText>
+        <h4>YARA</h4>
+      </EuiText>
+      <EuiSpacer size="l" />
+      <EuiPanel hasShadow>
+        <EuiInMemoryTable
+          items={yara.matches}
+          columns={columns}
+          sorting={sorting}
+        />
+      </EuiPanel>
     </Fragment>
   );
 };

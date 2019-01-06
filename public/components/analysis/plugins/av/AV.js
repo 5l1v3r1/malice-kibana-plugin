@@ -1,10 +1,20 @@
-import React, { Fragment } from 'react';
-import { EuiHealth, EuiAccordion, EuiInMemoryTable } from '@elastic/eui';
+import React, { Fragment } from "react";
+import {
+  EuiText,
+  EuiSpacer,
+  EuiPanel,
+  EuiHealth,
+  EuiInMemoryTable
+} from "@elastic/eui";
 
-export const AV = ({ av }) => {
+export const AVResults = ({ av }) => {
+  if (!av) {
+    return <Fragment />;
+  }
+
   const avResults = [];
-  Object.keys(av).map(function (key) {
-    if (av[key] && key !== 'yara') {
+  Object.keys(av).map(function(key) {
+    if (av[key] && key !== "yara") {
       avResults.push({
         name: key,
         result: av[key].result,
@@ -15,31 +25,36 @@ export const AV = ({ av }) => {
 
   const columns = [
     {
-      field: 'name',
-      name: 'Name',
+      field: "name",
+      name: "Name",
       sortable: true
     },
     {
-      field: 'result',
-      name: 'Result',
+      field: "result",
+      name: "Result",
       truncateText: true,
       sortable: true,
       render: result => {
-        const color = result ? 'danger' : 'success';
-        const label = result ? result : 'CLEAN';
+        const color = result ? "danger" : "success";
+        const label = result ? result : "Clean";
         return <EuiHealth color={color}>{label}</EuiHealth>;
       }
     },
     {
-      field: 'updated',
-      name: 'Updated'
+      field: "updated",
+      name: "Updated"
     }
   ];
+
   return (
     <Fragment>
-      <EuiAccordion id="accordion-av" buttonContent="ANTIVIRUS" initialIsOpen={true} paddingSize="m">
+      <EuiText>
+        <h4>ANTIVIRUS</h4>
+      </EuiText>
+      <EuiSpacer size="l" />
+      <EuiPanel hasShadow>
         <EuiInMemoryTable items={avResults} columns={columns} />
-      </EuiAccordion>
+      </EuiPanel>
     </Fragment>
   );
 };

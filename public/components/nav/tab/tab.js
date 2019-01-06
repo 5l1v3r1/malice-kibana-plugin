@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { EuiTabbedContent, EuiTitle, EuiText, EuiSpacer } from '@elastic/eui';
+import React, { Component, Fragment } from "react";
+import { EuiTabbedContent, EuiTitle, EuiText, EuiSpacer } from "@elastic/eui";
 
-import { Detection } from '../../analysis/Detection';
-import { Details } from '../../analysis/Details';
-import { Intel } from '../../analysis/Intel';
+import { Detection } from "../../analysis/Detection";
+import { Details } from "../../analysis/Details";
+import { Intel } from "../../analysis/Intel";
 
 class Tabs extends Component {
   constructor(props) {
@@ -11,32 +11,31 @@ class Tabs extends Component {
 
     this.tabs = [
       {
-        id: 'detection',
-        name: 'Detection',
+        id: "detection",
+        name: "Detection",
         content: (
           <Fragment>
             <EuiSpacer />
-            <EuiText>
-              <h4>ANTIVIRUS</h4>
-            </EuiText>
-            <EuiSpacer size="l" />
             <Detection av={this.props.data.plugins.av} />
           </Fragment>
         )
       },
       {
-        id: 'details',
-        name: 'Details',
+        id: "details",
+        name: "Details",
         content: (
           <Fragment>
             <EuiSpacer size="l" />
-            <Details plugins={this.props.data.plugins} />
+            <Details
+              file={this.props.data.file}
+              plugins={this.props.data.plugins}
+            />
           </Fragment>
         )
       },
       {
-        id: 'intel',
-        name: 'Intel',
+        id: "intel",
+        name: "Intel",
         content: (
           <Fragment>
             <EuiSpacer size="l" />
@@ -45,8 +44,8 @@ class Tabs extends Component {
         )
       },
       {
-        id: 'community',
-        name: 'Community',
+        id: "community",
+        name: "Community",
         content: (
           <Fragment>
             <EuiSpacer />
@@ -66,7 +65,7 @@ class Tabs extends Component {
         tabs={this.tabs}
         initialSelectedTab={this.tabs[0]}
         onTabClick={tab => {
-          console.log('clicked tab', tab);
+          console.log("clicked tab", tab);
         }}
       />
     );

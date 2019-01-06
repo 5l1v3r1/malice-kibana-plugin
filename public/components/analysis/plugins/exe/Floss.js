@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { EuiText, EuiCode, EuiAccordion } from '@elastic/eui';
+import React, { Fragment } from "react";
+import { EuiText, EuiPanel, EuiCode, EuiAccordion } from "@elastic/eui";
 
 export const Floss = ({ floss }) => {
   if (!floss) {
@@ -55,9 +55,16 @@ export const Floss = ({ floss }) => {
 
   return (
     <Fragment>
-      <EuiAccordion id="accordion-floss" buttonContent="Floss" initialIsOpen={true} paddingSize="m">
-        {renderDecoded(floss.decoded)}
-        {renderStack(floss.stack)}
+      <EuiAccordion
+        id="accordion-floss"
+        buttonContent="Floss"
+        initialIsOpen={true}
+        paddingSize="m"
+      >
+        <EuiPanel hasShadow>
+          {renderDecoded(floss.decoded)}
+          {renderStack(floss.stack)}
+        </EuiPanel>
       </EuiAccordion>
     </Fragment>
   );
