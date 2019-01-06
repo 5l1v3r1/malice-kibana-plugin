@@ -5,7 +5,6 @@ import { AVResults } from "../analysis/plugins/av/AV";
 import { Yara } from "../analysis/plugins/av/Yara";
 
 export function Detection({ av }) {
-  console.log("av", av);
   return (
     <Fragment>
       <AVResults av={av} />

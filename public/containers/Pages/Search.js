@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Redirect, Link } from "react-router-dom";
 import {
   EuiTitle,
   EuiPageContent,
@@ -12,27 +12,27 @@ import {
   EuiSpacer,
   EuiInMemoryTable,
   EuiLink
-} from '@elastic/eui';
-import rison from 'rison-node';
-import chrome from 'ui/chrome';
+} from "@elastic/eui";
+import rison from "rison-node";
+import chrome from "ui/chrome";
 
 // const baseUrl = chrome.addBasePath('/api/malice');
-import { SearchForm } from '../../components/search';
+import { SearchForm } from "../../components/search";
 
 export class Search extends Component {
   state = {
     total: 0,
     savedQueries: null,
-    discoverQuery: '',
+    discoverQuery: "",
     hits: [],
     redirect: false
   };
 
   getUrlParams(search) {
-    const hashes = search.slice(search.indexOf('?') + 1).split('&');
+    const hashes = search.slice(search.indexOf("?") + 1).split("&");
     const params = {};
     hashes.map(hash => {
-      const [key, val] = hash.split('=');
+      const [key, val] = hash.split("=");
       params[key] = decodeURIComponent(val);
     });
 
@@ -40,17 +40,22 @@ export class Search extends Component {
   }
 
   getDiscoverQuery() {
-    const basePath = window.location.protocol + '//' + window.location.host + chrome.addBasePath('/');
-    const mySessionStore = sessionStorage[`lastSubUrl:${basePath}app/kibana#/discover`];
-    console.log('basePath', basePath);
-    console.log('discover', `lastSubUrl:${basePath}/app/kibana#/discover`);
-    console.log('sessionStorage', sessionStorage);
-    console.log('mySessionStore', mySessionStore);
+    const basePath =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      chrome.addBasePath("/");
+    const mySessionStore =
+      sessionStorage[`lastSubUrl:${basePath}app/kibana#/discover`];
+    // console.log('basePath', basePath);
+    // console.log('discover', `lastSubUrl:${basePath}/app/kibana#/discover`);
+    // console.log('sessionStorage', sessionStorage);
+    // console.log('mySessionStore', mySessionStore);
     if (mySessionStore) {
       const params = this.getUrlParams(mySessionStore);
       Object.keys(params).forEach(key => {
         const session = rison.decode(params[key]);
-        console.log('session', session);
+        // console.log("session", session);
         if (session.query) {
           this.setState({ discoverQuery: session.query.query });
         }
@@ -76,18 +81,15 @@ export class Search extends Component {
     //     this.setState({ savedQueries: result });
     //     console.log('result :', result);
     //   });
-    console.log('props', this.props);
     const { httpClient } = this.props;
-    httpClient.get('../api/malice/search').then(resp => {
+    httpClient.get("../api/malice/search").then(resp => {
       this.setState({ total: resp.data.hits.total });
     });
   }
 
   onSearchSubmit = query => {
-    console.log('query', query);
     const { httpClient } = this.props;
-    httpClient.get('../api/malice/search?query=' + query).then(resp => {
-      console.log(resp.data.hits.hits);
+    httpClient.get("../api/malice/search?query=" + query).then(resp => {
       this.setState({ total: resp.data.hits.total });
       this.setState({ hits: resp.data.hits.hits });
     });
@@ -97,8 +99,6 @@ export class Search extends Component {
     const actions = [
       {
         render: item => {
-          console.log('item', item);
-
           return (
             <EuiLink color="secondary">
               <Link to={`/analysis/${item._id}`}>Report</Link>
@@ -110,34 +110,40 @@ export class Search extends Component {
 
     const columns = [
       {
-        field: '_source.file.name',
-        name: 'Name',
+        field: "_source.file.name",
+        name: "Name",
         sortable: true,
         hideForMobile: true,
-        'data-test-subj': 'firstNameCell'
+        "data-test-subj": "firstNameCell"
       },
       {
-        field: '_source.file.sha256',
-        name: 'sha256',
+        field: "_source.file.sha256",
+        name: "sha256",
         truncateText: true,
         sortable: true,
         hideForMobile: true,
-        'data-test-subj': 'firstNameCell'
+        "data-test-subj": "firstNameCell"
       },
       {
-        field: '_source.plugins.av.clamav.result',
-        name: 'AV',
+        field: "_source.plugins.av.clamav.result",
+        name: "AV",
         truncateText: true,
         hideForMobile: true,
-        'data-test-subj': 'firstNameCell'
+        "data-test-subj": "firstNameCell"
       },
       {
-        name: 'Actions',
+        name: "Actions",
         actions
       }
     ];
 
-    return <EuiInMemoryTable items={this.state.hits} columns={columns} pagination={true} />;
+    return (
+      <EuiInMemoryTable
+        items={this.state.hits}
+        columns={columns}
+        pagination={true}
+      />
+    );
   }
 
   render() {
@@ -156,13 +162,19 @@ export class Search extends Component {
             </EuiPageContentHeaderSection>
           </EuiPageContentHeader>
           <EuiPageContentBody>
-            <SearchForm query={this.state.discoverQuery} onSubmit={this.onSearchSubmit} />
+            <SearchForm
+              query={this.state.discoverQuery}
+              onSubmit={this.onSearchSubmit}
+            />
             <EuiSpacer size="l" />
             {this.renderData()}
             <EuiSpacer size="l" />
             <EuiText size="xs">
               <EuiTextAlign textAlign="right">
-                <EuiTextColor color="subdued">Number of Malice scans: {this.state.total || 'NO API CALL YET'}</EuiTextColor>
+                <EuiTextColor color="subdued">
+                  Number of Malice scans:{" "}
+                  {this.state.total || "NO API CALL YET"}
+                </EuiTextColor>
               </EuiTextAlign>
             </EuiText>
           </EuiPageContentBody>

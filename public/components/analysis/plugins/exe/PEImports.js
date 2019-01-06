@@ -12,7 +12,7 @@ export const PEImports = ({ imphash, imports }) => {
         return <li key={s.name}>{s.name}</li>;
       });
       return (
-        <Fragment>
+        <Fragment key={key}>
           <EuiAccordion
             id={key}
             buttonContent={key}

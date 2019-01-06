@@ -18,7 +18,7 @@ export const Floss = ({ floss }) => {
         );
       });
       return (
-        <EuiText>
+        <EuiText key={decoded.location}>
           Location: <EuiCode>{decoded.location}</EuiCode>
           <div className="decoded-list">
             <ul>{liItems}</ul>

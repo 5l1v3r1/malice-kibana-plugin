@@ -11,7 +11,7 @@ import { PESignature } from "./PESignature";
 import { PEiD } from "./PEiD";
 
 export const PEScan = ({ pescan }) => {
-  console.log("pescan", pescan);
+  // console.log("pescan", pescan);
   if (!pescan) {
     return <Fragment />;
   }

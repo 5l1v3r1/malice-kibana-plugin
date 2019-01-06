@@ -37,7 +37,7 @@ export const Yara = ({ yara }) => {
   const sorting = {
     sort: {
       field: "Rule",
-      direction: "dec"
+      direction: "desc"
     }
   };
 
