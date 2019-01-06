@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { EuiText, EuiBetaBadge, EuiBadge } from "@elastic/eui";
-import _ from "lodash";
 
 export const PEiD = ({ peid, isPacked, language }) => {
   if (!peid) {
@@ -28,7 +27,7 @@ export const PEiD = ({ peid, isPacked, language }) => {
         <div className="pe-peid">
           <ul>{peidItems}</ul>
           <h5>Is Probably Packed: {packedBadge}</h5>
-          <h5>Language: {language}</h5>
+          {language ? <h5>Language: {language}</h5> : <div />}
         </div>
       </EuiText>
     </Fragment>

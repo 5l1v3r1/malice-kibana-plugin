@@ -6,6 +6,7 @@ import {
   EuiHealth,
   EuiInMemoryTable
 } from "@elastic/eui";
+import _ from "lodash";
 
 export const AVResults = ({ av }) => {
   if (!av) {
@@ -16,7 +17,7 @@ export const AVResults = ({ av }) => {
   Object.keys(av).map(function(key) {
     if (av[key] && key !== "yara") {
       avResults.push({
-        name: key,
+        name: _.startCase(key),
         result: av[key].result,
         updated: av[key].updated
       });

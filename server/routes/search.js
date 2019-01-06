@@ -21,6 +21,7 @@ export default function(server) {
         .callWithRequest(req, "search", {
           index: "malice",
           type: "samples",
+          size: 50,
           q: query || "*"
         })
         .then(function(result) {

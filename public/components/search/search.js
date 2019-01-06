@@ -1,6 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 
-import { EuiFieldSearch, EuiRange, EuiTextArea, EuiFormRow, EuiFlexGroup, EuiFlexItem, EuiSpacer, EuiButton } from '@elastic/eui';
+import {
+  EuiFieldSearch,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiButton
+} from "@elastic/eui";
 
 export default class SearchForm extends Component {
   state = { query: this.props.query };
@@ -11,7 +16,6 @@ export default class SearchForm extends Component {
   };
 
   render() {
-    console.log('this.props.query :', this.props.query);
     return (
       <Fragment>
         <EuiFlexGroup>
