@@ -15,6 +15,7 @@ import {
 } from "@elastic/eui";
 import rison from "rison-node";
 import chrome from "ui/chrome";
+import moment from "moment";
 
 // const baseUrl = chrome.addBasePath('/api/malice');
 import { SearchForm } from "../../components/search";
@@ -95,6 +96,25 @@ export class Search extends Component {
     });
   };
 
+  renderRatio(av) {
+    const total = Object.keys(av).length;
+    let positives = 0;
+    Object.keys(av).map(key => {
+      if (av[key] && av[key].result && key !== "yara") {
+        positives++;
+      }
+    });
+    const ratio = Math.floor((positives / total) * 100);
+    if (ratio > 60) {
+      return <EuiTextColor color="danger">{ratio}%</EuiTextColor>;
+    }
+    if (60 > ratio && ratio > 30) {
+      return <EuiTextColor color="warning">{ratio}%</EuiTextColor>;
+    } else {
+      return <EuiTextColor color="secondary">{ratio}%</EuiTextColor>;
+    }
+  }
+
   renderData() {
     const actions = [
       {
@@ -112,27 +132,39 @@ export class Search extends Component {
       {
         field: "_source.file.name",
         name: "Name",
-        sortable: true,
-        hideForMobile: true,
-        "data-test-subj": "firstNameCell"
+        dataType: "string",
+        align: "left",
+        truncateText: true,
+        width: "15%"
       },
       {
         field: "_source.file.sha256",
-        name: "sha256",
+        name: "SHA-256",
+        dataType: "string",
+        align: "left",
         truncateText: true,
-        sortable: true,
-        hideForMobile: true,
-        "data-test-subj": "firstNameCell"
+        width: "50%"
       },
       {
-        field: "_source.plugins.av.clamav.result",
-        name: "AV",
+        field: "_source.scan_date",
+        name: "Scanned",
+        dataType: "date",
+        align: "left",
         truncateText: true,
-        hideForMobile: true,
-        "data-test-subj": "firstNameCell"
+        width: "15%",
+        render: scan_date => moment.utc(scan_date).fromNow()
+      },
+      {
+        field: "_source.plugins.av",
+        name: "Ratio",
+        dataType: "string",
+        sortable: true,
+        width: "10%",
+        render: av => this.renderRatio(av) || <div />
       },
       {
         name: "Actions",
+        width: "10%",
         actions
       }
     ];
@@ -147,10 +179,6 @@ export class Search extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect push to="/analysis" />;
-    }
-
     return (
       <div>
         <EuiPageContent>
@@ -172,8 +200,7 @@ export class Search extends Component {
             <EuiText size="xs">
               <EuiTextAlign textAlign="right">
                 <EuiTextColor color="subdued">
-                  Number of Malice scans:{" "}
-                  {this.state.total || "NO API CALL YET"}
+                  Number of Scans: {this.state.total || 0}
                 </EuiTextColor>
               </EuiTextAlign>
             </EuiText>
