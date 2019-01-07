@@ -20,7 +20,8 @@ export const PEResources = ({ resources }) => {
       name: "File Type",
       dataType: "string",
       align: "left",
-      width: "9%"
+      width: "10%",
+      truncateText: true
     },
     {
       field: "name",
@@ -42,7 +43,7 @@ export const PEResources = ({ resources }) => {
       dataType: "string",
       align: "left",
       truncateText: true,
-      width: "34%"
+      width: "33%"
     }
   ];
 

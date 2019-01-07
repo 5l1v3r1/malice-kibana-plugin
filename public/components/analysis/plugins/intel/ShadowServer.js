@@ -37,26 +37,25 @@ export const ShadowServer = ({ ss }) => {
     const whitelistResults = [];
     Object.keys(whitelist).map(function(key) {
       whitelistResults.push({
-        name: _.startCase(key),
-        result: whitelist[key]
+        field: key.replace("_", " ").toUpperCase(),
+        value: whitelist[key]
       });
     });
     const whitelistColumns = [
       {
-        field: "name",
-        name: "Name",
-        sortable: true
+        field: "field",
+        name: "Field",
+        dataType: "string",
+        align: "left",
+        width: "30%"
       },
       {
-        field: "result",
-        name: "Result",
+        field: "value",
+        name: "Value",
         truncateText: true,
-        sortable: true,
-        render: result => {
-          const color = result ? "danger" : "success";
-          const label = result ? result : "CLEAN";
-          return <EuiHealth color={color}>{label}</EuiHealth>;
-        }
+        dataType: "string",
+        align: "left",
+        width: "70%"
       }
     ];
 

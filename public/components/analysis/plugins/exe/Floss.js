@@ -2,12 +2,12 @@ import React, { Fragment } from "react";
 import { EuiText, EuiPanel, EuiCode, EuiAccordion } from "@elastic/eui";
 
 export const Floss = ({ floss }) => {
-  if (!floss) {
+  if (!floss || (!floss.decoded.length && !floss.stack.length)) {
     return <Fragment />;
   }
 
   const renderDecoded = decoded => {
-    if (!decoded) {
+    if (!decoded || !decoded.length) {
       return <Fragment />;
     }
     const ulItems = decoded.map(decoded => {
@@ -41,7 +41,7 @@ export const Floss = ({ floss }) => {
   };
 
   const renderStack = stack => {
-    if (!stack) {
+    if (!stack || !stack.length) {
       return <Fragment />;
     }
     const items = stack.map(s => {

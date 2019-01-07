@@ -18,11 +18,11 @@ export function FileSummary({ file, scanDate, ratio }) {
       description: `${file.sha256}`
     },
     {
-      title: "File name",
+      title: "File Name",
       description: `${file.name}`
     },
     {
-      title: "File size",
+      title: "File Size",
       description: `${file.size}`
     },
     {
