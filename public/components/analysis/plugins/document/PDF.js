@@ -5,7 +5,7 @@ import { PdfId } from "./PDFiD";
 import { PdfParser } from "./PdfParser";
 
 export const Pdf = ({ pdf }) => {
-  console.log("pdf :", pdf);
+  // console.log("pdf :", pdf);
   if (!pdf) {
     return <Fragment />;
   }
