@@ -59,7 +59,7 @@ release: readme stop ## Create a new release
 	rm -rf release && mkdir release
 	go get github.com/progrium/gh-release/...
 	cp build/* release
-	@hack/build/trigger
+	@hack/trigger/build
 	gh-release create $(REPO) $(VERSION) \
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 

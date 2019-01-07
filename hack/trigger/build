@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
 
-http "https://cloud.docker.com/api/build/v1/source/fe55df0c-145e-408a-b2d4-0bc50727618b/trigger/25b7c5db-f319-4e07-a3b5-22bd3f11bca5/call/"
+http POST "https://cloud.docker.com/api/build/v1/source/fe55df0c-145e-408a-b2d4-0bc50727618b/trigger/25b7c5db-f319-4e07-a3b5-22bd3f11bca5/call/"
