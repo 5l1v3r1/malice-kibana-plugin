@@ -15,17 +15,20 @@ export const ShadowServer = ({ ss }) => {
     return <Fragment />;
   }
 
-  const avResults = [];
   const { antivirus } = ss.sandbox;
   const { metadata } = ss.sandbox;
   const { whitelist } = ss;
 
-  Object.keys(antivirus).map(function(key) {
-    avResults.push({
-      name: key,
-      result: antivirus[key]
-    });
-  });
+  const seenRange = [
+    {
+      title: "FirstSeen",
+      description: `${metadata.first_seen}`
+    },
+    {
+      title: "LastSeen",
+      description: `${metadata.last_seen}`
+    }
+  ];
 
   const renderWhiteList = whitelist => {
     if (!whitelist) {
@@ -67,35 +70,47 @@ export const ShadowServer = ({ ss }) => {
     );
   };
 
-  const columns = [
-    {
-      field: "name",
-      name: "Name",
-      sortable: true
-    },
-    {
-      field: "result",
-      name: "Result",
-      truncateText: true,
-      sortable: true,
-      render: result => {
-        const color = result ? "danger" : "success";
-        const label = result ? result : "CLEAN";
-        return <EuiHealth color={color}>{label}</EuiHealth>;
-      }
+  const renderAntiVirus = antivirus => {
+    if (!antivirus) {
+      return <Fragment />;
     }
-  ];
 
-  const seenRange = [
-    {
-      title: "FirstSeen",
-      description: `${metadata.first_seen}`
-    },
-    {
-      title: "LastSeen",
-      description: `${metadata.last_seen}`
-    }
-  ];
+    const avResults = [];
+    Object.keys(antivirus).map(function(key) {
+      avResults.push({
+        name: key,
+        result: antivirus[key]
+      });
+    });
+
+    const columns = [
+      {
+        field: "name",
+        name: "Name",
+        sortable: true
+      },
+      {
+        field: "result",
+        name: "Result",
+        truncateText: true,
+        sortable: true,
+        render: result => {
+          const color = result ? "danger" : "success";
+          const label = result ? result : "CLEAN";
+          return <EuiHealth color={color}>{label}</EuiHealth>;
+        }
+      }
+    ];
+
+    return (
+      <Fragment>
+        <EuiTextColor color="subdued">
+          <h6>ANTIVIRUS</h6>
+        </EuiTextColor>
+        <EuiInMemoryTable items={avResults} columns={columns} />
+      </Fragment>
+    );
+  };
 
   return (
     <Fragment>
@@ -112,10 +127,7 @@ export const ShadowServer = ({ ss }) => {
             compressed
           />
           <EuiSpacer />
-          <EuiTextColor color="subdued">
-            <h6>ANTIVIRUS</h6>
-          </EuiTextColor>
-          <EuiInMemoryTable items={avResults} columns={columns} />
+          {renderAntiVirus(antivirus)}
           {renderWhiteList(whitelist)}
         </EuiPanel>
       </EuiAccordion>
