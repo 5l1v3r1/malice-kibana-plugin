@@ -10,7 +10,7 @@ import {
 import "@elastic/eui/dist/eui_theme_dark.css";
 
 // import { SavedObjectsClient } from 'ui/saved_objects';
-import { Crumbs } from "../components/nav/breadcrumbs";
+import { Crumbs } from "../components/nav/Crumbs";
 import { Search } from "./Pages/Search";
 import { Analysis } from "./Pages/Analysis";
 import logoUrl from "../malice.svg";
@@ -25,7 +25,7 @@ export class Main extends React.Component {
           <EuiPage>
             <EuiPageBody>
               <EuiPageHeader>
-                <Crumbs breadcrumbs={this.state.breadcrumbs} />
+                <Crumbs crumbs={this.state.breadcrumbs} />
                 <EuiImage size="s" hasShadow alt="Malice logo" url={logoUrl} />
               </EuiPageHeader>
               <EuiPageContent>

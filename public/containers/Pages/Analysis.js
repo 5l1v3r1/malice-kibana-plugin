@@ -10,7 +10,7 @@ import {
 } from "@elastic/eui";
 
 import { FileSummary } from "../../components/analysis/FileSummary";
-import { Tabs } from "../../components/nav/tab";
+import { Tabs } from "../../components/nav/Tabs";
 
 export class Analysis extends Component {
   state = { data: null };

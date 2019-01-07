@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { EuiTabbedContent, EuiTitle, EuiText, EuiSpacer } from "@elastic/eui";
 
-import { Detection } from "../../analysis/Detection";
-import { Details } from "../../analysis/Details";
-import { Intel } from "../../analysis/Intel";
+import { Detection } from "../analysis/Detection";
+import { Details } from "../analysis/Details";
+import { Intel } from "../analysis/Intel";
 
-class Tabs extends Component {
+export class Tabs extends Component {
   constructor(props) {
     super(props);
 
@@ -71,5 +71,3 @@ class Tabs extends Component {
     );
   }
 }
-
-export default Tabs;

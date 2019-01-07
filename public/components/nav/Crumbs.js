@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
+import { EuiBreadcrumbs, EuiSpacer } from "@elastic/eui";
 
-import { EuiBreadcrumbs, EuiButton, EuiPageContentHeader, EuiPageContentHeaderSection, EuiTitle, EuiSpacer } from '@elastic/eui';
-
-export default props => {
+export const Crumbs = ({ crumbs }) => {
   // const breadcrumbs = [
   // {
   //   text: 'Search',
@@ -31,10 +30,10 @@ export default props => {
   //   }
   // }
   // ];
-  console.log('breadcrumbs :', props.breadcrumbs);
+
   return (
     <Fragment>
-      <EuiBreadcrumbs breadcrumbs={props.breadcrumbs} responsive={true} truncate={false} />
+      <EuiBreadcrumbs breadcrumbs={crumbs} responsive={true} truncate={false} />
       <EuiSpacer size="xs" />
     </Fragment>
   );
