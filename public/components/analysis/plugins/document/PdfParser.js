@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { EuiText, EuiSpacer, EuiInMemoryTable } from "@elastic/eui";
+import { EuiText, EuiCode, EuiSpacer, EuiInMemoryTable } from "@elastic/eui";
 import _ from "lodash";
 
 export const PdfParser = ({ streams }) => {
@@ -53,6 +53,32 @@ export const PdfParser = ({ streams }) => {
     );
   };
 
+  const renderCarvedContent = cc => {
+    if (!cc || !cc.length) {
+      return <Fragment />;
+    }
+
+    const ccItems = cc.map(c => {
+      return (
+        <Fragment key={c.key}>
+          <h6>{c.key}</h6>
+          <EuiCode language="js" fontSize="l" paddingSize="s" color="dark">
+            {c.content}
+          </EuiCode>
+        </Fragment>
+      );
+    });
+
+    return (
+      <Fragment>
+        <EuiText>
+          <h5>Carved Content</h5>
+          {ccItems}
+        </EuiText>
+      </Fragment>
+    );
+  };
+
   return (
     <Fragment>
       <EuiText>
@@ -64,6 +90,7 @@ export const PdfParser = ({ streams }) => {
       </EuiText>
       <EuiSpacer />
       {renderEmbeddedFilesTable(streams.embedded)}
+      {renderCarvedContent(streams.carved.contents)}
       <EuiSpacer />
     </Fragment>
   );
