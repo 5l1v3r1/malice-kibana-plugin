@@ -3,7 +3,7 @@ import { EuiText, EuiPanel, EuiSpacer, EuiInMemoryTable } from "@elastic/eui";
 import _ from "lodash";
 
 export const Yara = ({ yara }) => {
-  if (!yara) {
+  if (!yara || !yara.matches.length) {
     return <Fragment />;
   }
 

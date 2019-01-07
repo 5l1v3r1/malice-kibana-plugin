@@ -64,6 +64,7 @@ export const ShadowServer = ({ ss }) => {
         <EuiTextColor color="subdued">
           <h6>WHITE LIST</h6>
         </EuiTextColor>
+        <EuiSpacer />
         <EuiInMemoryTable items={whitelistResults} columns={whitelistColumns} />
       </Fragment>
     );
@@ -106,6 +107,7 @@ export const ShadowServer = ({ ss }) => {
         <EuiTextColor color="subdued">
           <h6>ANTIVIRUS</h6>
         </EuiTextColor>
+        <EuiSpacer />
         <EuiInMemoryTable items={avResults} columns={columns} />
       </Fragment>
     );
