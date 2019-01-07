@@ -70,6 +70,7 @@ export class Search extends Component {
       manage state and update your UI than this.
     */
     this.getDiscoverQuery();
+
     // console.log('SavedObjectsClient', SavedObjectsClient);
     // const client = new SavedObjectsClient();
     // client
@@ -82,6 +83,7 @@ export class Search extends Component {
     //     this.setState({ savedQueries: result });
     //     console.log('result :', result);
     //   });
+
     const { httpClient } = this.props;
     httpClient.get("../api/malice/search").then(resp => {
       this.setState({ total: resp.data.hits.total });
@@ -97,18 +99,21 @@ export class Search extends Component {
   };
 
   renderRatio(av) {
-    const total = Object.keys(av).length;
+    if (!av) {
+      return <div />;
+    }
+
     let positives = 0;
     Object.keys(av).map(key => {
       if (av[key] && av[key].result && key !== "yara") {
         positives++;
       }
     });
-    const ratio = Math.floor((positives / total) * 100);
+    const ratio = Math.floor((positives / Object.keys(av).length) * 100);
+
     if (ratio > 60) {
       return <EuiTextColor color="danger">{ratio}%</EuiTextColor>;
-    }
-    if (60 > ratio && ratio > 30) {
+    } else if (60 > ratio && ratio > 30) {
       return <EuiTextColor color="warning">{ratio}%</EuiTextColor>;
     } else {
       return <EuiTextColor color="secondary">{ratio}%</EuiTextColor>;
@@ -160,7 +165,7 @@ export class Search extends Component {
         dataType: "string",
         sortable: true,
         width: "10%",
-        render: av => this.renderRatio(av) || <div />
+        render: av => this.renderRatio(av)
       },
       {
         name: "Actions",

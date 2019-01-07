@@ -7,6 +7,9 @@ export const Floss = ({ floss }) => {
   }
 
   const renderDecoded = decoded => {
+    if (!decoded) {
+      return <Fragment />;
+    }
     const ulItems = decoded.map(decoded => {
       const liItems = decoded.strings.map(s => {
         return (
@@ -38,6 +41,9 @@ export const Floss = ({ floss }) => {
   };
 
   const renderStack = stack => {
+    if (!stack) {
+      return <Fragment />;
+    }
     const items = stack.map(s => {
       return <li key={s}>{s}</li>;
     });
