@@ -24,12 +24,26 @@ export class Analysis extends Component {
       });
   }
 
+  getRatio() {
+    const { av } = this.state.data.plugins;
+    let positives = 0;
+    Object.keys(av).map(key => {
+      if (av[key] && av[key].result && key !== "yara") {
+        positives++;
+      }
+    });
+    return Math.floor((positives / Object.keys(av).length) * 100);
+  }
   renderAnalysis() {
     const data = this.state.data;
     if (data) {
       return (
         <div className="euiFlexItem">
-          <FileSummary file={data.file} scanDate={data.scan_date} />
+          <FileSummary
+            file={data.file}
+            scanDate={data.scan_date}
+            ratio={this.getRatio()}
+          />
           <EuiSpacer size="l" />
           <Tabs data={data} />
         </div>
