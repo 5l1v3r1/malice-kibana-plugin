@@ -7,21 +7,47 @@ export const PdfParser = ({ streams }) => {
     return <Fragment />;
   }
 
-  const ppStats = streams.stats.map(s => {
-    return <li key={s}>{s}</li>;
-  });
+  const renderStats = s => {
+    if (!s || !s.length) {
+      return <Fragment />;
+    }
 
-  const ppTags = Object.keys(streams.tags).map(function(key) {
-    const listItems = streams.tags[key].map(s => {
+    const ppStats = s.map(s => {
       return <li key={s}>{s}</li>;
     });
+
     return (
-      <Fragment key={key}>
-        <h6>{_.startCase(key)}</h6>
-        <ul>{listItems}</ul>
+      <Fragment>
+        <h5>Stats</h5>
+        <ul>{ppStats}</ul>
       </Fragment>
     );
-  });
+  };
+
+  const renderTags = t => {
+    if (!t || !t.length) {
+      return <Fragment />;
+    }
+
+    const ppTags = Object.keys(t).map(function(key) {
+      const listItems = t[key].map(s => {
+        return <li key={s}>{s}</li>;
+      });
+      return (
+        <Fragment key={key}>
+          <h6>{_.startCase(key)}</h6>
+          <ul>{listItems}</ul>
+        </Fragment>
+      );
+    });
+
+    return (
+      <Fragment>
+        <h5>Tags</h5>
+        {ppTags}
+      </Fragment>
+    );
+  };
 
   const renderEmbeddedFilesTable = e => {
     if (!e || !e.length) {
@@ -83,10 +109,8 @@ export const PdfParser = ({ streams }) => {
     <Fragment>
       <EuiText>
         <h4>pdf-parser</h4>
-        <h5>Stats</h5>
-        <ul>{ppStats}</ul>
-        <h5>Tags</h5>
-        {ppTags}
+        {renderStats(streams.stats)}
+        {renderTags(streams.tags)}
       </EuiText>
       <EuiSpacer />
       {renderEmbeddedFilesTable(streams.embedded)}

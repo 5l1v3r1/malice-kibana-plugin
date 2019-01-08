@@ -9,13 +9,14 @@ import {
 import _ from "lodash";
 
 export const AVResults = ({ av }) => {
+  // console.log("av", av);
   if (!av) {
     return <Fragment />;
   }
 
   const avResults = [];
   Object.keys(av).map(function(key) {
-    if (av[key] && key !== "yara") {
+    if (av[key] && key !== "yara" && !av[key].error) {
       avResults.push({
         name: _.startCase(key),
         result: av[key].result,
