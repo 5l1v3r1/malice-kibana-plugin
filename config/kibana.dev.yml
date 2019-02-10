@@ -1,11 +1,10 @@
-server.host: '0.0.0.0'
-elasticsearch.url: 'http://localhost:9200'
+server.host: "0.0.0.0"
+elasticsearch.url: "http://localhost:9200"
 # # status.allowAnonymous: true
-elasticsearch.username: 'elastic'
-elasticsearch.password: 'changeme'
+elasticsearch.username: "elastic"
+elasticsearch.password: "changeme"
 # # server.ssl.enabled: false
 xpack.security.enabled: false
-
-optimize:
-  unsafeCache: true
-  watchPrebuild: false
+# optimize:
+#   unsafeCache: true
+#   watchPrebuild: false
