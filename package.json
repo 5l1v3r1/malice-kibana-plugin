@@ -23,6 +23,7 @@
     "@kbn/i18n": "link:../../kibana/packages/kbn-i18n",
     "@kbn/expect": "link:../../kibana/packages/kbn-expect",
     "@kbn/plugin-helpers": "link:../../kibana/packages/kbn-plugin-helpers",
+    "boom": "^7.2.0",
     "source-map-loader": "^0.2.4",
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14"

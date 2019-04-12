@@ -1,5 +1,6 @@
 server.host: "0.0.0.0"
-elasticsearch.url: "http://localhost:9200"
+elasticsearch.hosts:
+  - http://localhost:9200
 # # status.allowAnonymous: true
 elasticsearch.username: "elastic"
 elasticsearch.password: "changeme"
