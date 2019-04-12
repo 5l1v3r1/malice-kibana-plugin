@@ -60,3 +60,4 @@ typings/
 *.bu
 release/
 build/
+/public/app.css

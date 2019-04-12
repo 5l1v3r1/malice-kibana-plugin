@@ -57,7 +57,7 @@ test: stop elasticsearch ## Test build plugin
 release: readme stop ## Create a new release
 	@echo "===> Creating Release"
 	rm -rf release && mkdir release
-	go get github.com/progrium/gh-release/...
+	# go get github.com/progrium/gh-release/...
 	cp build/* release
 	@hack/trigger/build
 	gh-release create $(REPO) $(VERSION) \
