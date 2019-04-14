@@ -63,6 +63,7 @@ release: readme stop ## Create a new release
 	gh-release create $(REPO) $(VERSION) \
 		$(shell git rev-parse --abbrev-ref HEAD) $(VERSION)
 
+.PHONY: destroy
 destroy: ## Remove release from the VERSION
 	@echo "===> Deleting Release"
 	git tag -d v$(VERSION)
